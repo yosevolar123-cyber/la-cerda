@@ -1,0 +1,156 @@
+<section class="pagina confirmar">
+  @if (ventaConfirmada(); as v) {
+    <div class="exito">
+      <div class="exito__sello"><app-icon name="check" [size]="32" /></div>
+      <h2>Venta registrada</h2>
+      <p class="exito__codigo">{{ v.codigo }}</p>
+      <div class="exito__acciones">
+        @if (v.enlaceWhatsapp) {
+          <a
+            [href]="v.enlaceWhatsapp"
+            target="_blank"
+            rel="noopener"
+            class="btn btn--whatsapp btn--lg"
+            >Enviar comprobante por WhatsApp</a
+          >
+        }
+        <app-button variant="secondary" size="lg" (click)="nuevaVenta()">
+          <app-icon name="plus" [size]="18" /> Registrar otra venta
+        </app-button>
+      </div>
+    </div>
+  } @else if (cart.items().length === 0) {
+    <div class="vacio aparecer">
+      <p class="vacio__titulo">Esta venta no tiene productos</p>
+      <p>Vuelve al catálogo y usa “Agregar” en los productos que se llevan.</p>
+      <a routerLink="/secretaria/venta" class="btn btn--primary btn--md">Ir al catálogo</a>
+    </div>
+  } @else {
+    <div class="columnas">
+      <div class="formulario">
+        <h2>Confirmar venta</h2>
+
+        @if (error()) {
+          <p class="field__error" role="alert">{{ error() }}</p>
+        }
+
+        <section class="paso aparecer" [style.--i]="0">
+          <h3><span class="paso__num">1</span> Cliente <small>opcional</small></h3>
+          @if (clienteSeleccionado(); as c) {
+            <div class="cliente-elegido">
+              <span class="cliente-elegido__avatar">{{ c.nombre.charAt(0) }}</span>
+              <div>
+                <strong>{{ c.nombre }}</strong>
+                <p>{{ c.identificacion }}{{ c.telefono ? ' · ' + c.telefono : '' }}</p>
+              </div>
+              <button
+                type="button"
+                class="btn-icono"
+                (click)="quitarCliente()"
+                aria-label="Quitar cliente"
+              >
+                <app-icon name="x" [size]="18" />
+              </button>
+            </div>
+          } @else {
+            <div class="buscador-cliente">
+              <app-icon name="search" [size]="18" />
+              <input
+                class="input"
+                type="search"
+                placeholder="Nombre, CI, teléfono o correo…"
+                [value]="terminoBusqueda()"
+                (input)="buscarCliente($any($event.target).value)"
+                aria-label="Buscar cliente"
+              />
+            </div>
+            @if (resultadosBusqueda().length > 0) {
+              <ul class="resultados">
+                @for (c of resultadosBusqueda(); track c.id; let i = $index) {
+                  <li>
+                    <button
+                      type="button"
+                      class="resultado aparecer"
+                      [style.--i]="i"
+                      (click)="seleccionarCliente(c)"
+                    >
+                      <strong>{{ c.nombre }}</strong>
+                      <span>{{ c.identificacion }}{{ c.telefono ? ' · ' + c.telefono : '' }}</span>
+                    </button>
+                  </li>
+                }
+              </ul>
+            }
+            <p class="field__hint">Si no eliges cliente, queda como venta de mostrador anónima.</p>
+          }
+        </section>
+
+        <section class="paso aparecer" [style.--i]="1">
+          <h3><span class="paso__num">2</span> Entrega</h3>
+          <div class="modalidades" role="radiogroup" aria-label="Modalidad de entrega">
+            <button
+              type="button"
+              role="radio"
+              class="modalidad"
+              [class.modalidad--activa]="modalidad() === 'local'"
+              [attr.aria-checked]="modalidad() === 'local'"
+              (click)="modalidad.set('local')"
+            >
+              <app-icon name="bag" [size]="22" />
+              <strong>Local</strong>
+              <span>Retira ahora en el local</span>
+            </button>
+            <button
+              type="button"
+              role="radio"
+              class="modalidad"
+              [class.modalidad--activa]="modalidad() === 'envio'"
+              [attr.aria-checked]="modalidad() === 'envio'"
+              (click)="modalidad.set('envio')"
+            >
+              <app-icon name="truck" [size]="22" />
+              <strong>Envío</strong>
+              <span>A domicilio, se coordina por WhatsApp</span>
+            </button>
+          </div>
+
+          @if (modalidad() === 'envio') {
+            <div class="field aparecer">
+              <label class="field__label" for="direccion">Dirección de entrega</label>
+              <textarea
+                id="direccion"
+                class="textarea"
+                [formControl]="form.controls.direccion"
+                placeholder="Calle, número, zona, referencia…"
+              ></textarea>
+              @if (form.controls.direccion.invalid && form.controls.direccion.touched) {
+                <span class="field__error">La dirección es obligatoria para envío.</span>
+              }
+            </div>
+          }
+        </section>
+      </div>
+
+      <aside class="resumen aparecer" [style.--i]="2">
+        <h3>Resumen</h3>
+        <ul class="resumen__lista">
+          @for (item of cart.items(); track item.productoId) {
+            <li>
+              <span
+                ><b>{{ item.cantidad }}×</b> {{ item.nombre }}</span
+              >
+              <span>Bs {{ (item.cantidad * item.precio).toFixed(2) }}</span>
+            </li>
+          }
+        </ul>
+        <div class="resumen__total">
+          <span>Total</span>
+          <strong>Bs {{ cart.total().toFixed(2) }}</strong>
+        </div>
+        <app-button size="lg" [loading]="guardando()" (click)="confirmar()">
+          Confirmar venta <app-icon name="arrow-right" [size]="18" />
+        </app-button>
+      </aside>
+    </div>
+  }
+</section>

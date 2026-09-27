@@ -1,0 +1,134 @@
+<section class="pagina pagina--media">
+  <app-page-header
+    titulo="Pedidos"
+    subtitulo="Revisa los pedidos entrantes, actualiza su estado y coordina la entrega."
+  >
+    <a routerLink="venta" class="btn btn--primary btn--md">
+      <app-icon name="plus" [size]="18" />
+      Nueva venta
+    </a>
+  </app-page-header>
+
+  <div class="contadores">
+    <button
+      type="button"
+      class="contador aparecer"
+      [style.--i]="0"
+      (click)="filtrarPor(filtro() === 'pendiente' ? null : 'pendiente')"
+    >
+      <app-stat-card
+        icono="clock"
+        etiqueta="Pendientes"
+        [valor]="contadores().pendientes"
+        tono="rosa"
+        [activa]="filtro() === 'pendiente'"
+      />
+    </button>
+    <button
+      type="button"
+      class="contador aparecer"
+      [style.--i]="1"
+      (click)="filtrarPor(filtro() === 'enviado' ? null : 'enviado')"
+    >
+      <app-stat-card
+        icono="truck"
+        etiqueta="Enviados"
+        [valor]="contadores().enviados"
+        tono="secundario"
+        [activa]="filtro() === 'enviado'"
+      />
+    </button>
+    <button
+      type="button"
+      class="contador aparecer"
+      [style.--i]="2"
+      (click)="filtrarPor(filtro() === 'recibido' ? null : 'recibido')"
+    >
+      <app-stat-card
+        icono="check"
+        etiqueta="Recibidos hoy"
+        [valor]="contadores().recibidosHoy"
+        tono="exito"
+        [activa]="filtro() === 'recibido'"
+      />
+    </button>
+  </div>
+
+  <div class="fila-chips filtros">
+    <button
+      class="chip"
+      [class.chip--activa]="filtro() === null"
+      type="button"
+      (click)="filtrarPor(null)"
+    >
+      Todos
+    </button>
+    @for (paso of pasosPrincipales; track paso) {
+      <button
+        class="chip"
+        [class.chip--activa]="filtro() === paso"
+        type="button"
+        (click)="filtrarPor(paso)"
+      >
+        {{ ESTADO_UI_LABELS[paso] }}
+      </button>
+    }
+    <button
+      class="chip chip--secundaria"
+      [class.chip--activa]="filtro() === 'cancelado'"
+      type="button"
+      (click)="filtrarPor(filtro() === 'cancelado' ? null : 'cancelado')"
+    >
+      Cancelados
+    </button>
+  </div>
+
+  @if (cargando()) {
+    <div class="lista">
+      @for (i of [1, 2, 3, 4]; track i) {
+        <div class="skeleton fila-skeleton"></div>
+      }
+    </div>
+  } @else if (pedidos().length === 0) {
+    <div class="vacio aparecer">
+      <p class="vacio__titulo">No hay pedidos aquí</p>
+      <p>Cuando lleguen pedidos con este estado aparecerán en esta lista.</p>
+    </div>
+  } @else {
+    <ul class="lista">
+      @for (p of pedidos(); track p.id; let i = $index) {
+        <li class="aparecer" [style.--i]="i">
+          <a [routerLink]="[p.id]" class="pedido bloque">
+            <span
+              class="pedido__icono"
+              [class.pedido__icono--mostrador]="p.canal_origen === 'secretaria_mostrador'"
+            >
+              <app-icon
+                [name]="p.canal_origen === 'secretaria_mostrador' ? 'bag' : 'truck'"
+                [size]="18"
+              />
+            </span>
+            <span class="pedido__principal">
+              <span class="pedido__codigo">{{ p.codigo }}</span>
+              <span class="pedido__cliente">
+                @if (p.clientes?.nombre; as nombre) {
+                  {{ nombre }}
+                  @if (p.canal_origen === 'secretaria_mostrador') {
+                    · Mostrador
+                  }
+                } @else {
+                  Venta de mostrador
+                }
+              </span>
+            </span>
+            <span class="pedido__fecha">{{ p.fecha | date: 'd MMM, HH:mm' }}</span>
+            <app-badge [tone]="tonoEstado(p.estado)">{{
+              ESTADO_UI_LABELS[estadoUI(p.estado)]
+            }}</app-badge>
+            <span class="pedido__flecha"><app-icon name="arrow-right" [size]="18" /></span>
+          </a>
+        </li>
+      }
+    </ul>
+  }
+</section>

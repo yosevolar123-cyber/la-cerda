@@ -1,0 +1,39 @@
+﻿Nombre: Hamburguesa Pollo Express - 3 unidades
+Marca: Sofía
+Categoría: Productos de pollo
+Nombre en el catálogo: Hamburguesa Pollo Express Sofía en sachet
+Código del producto: 540305
+Código de barras: 7774112100288
+
+Tipo de producto/especificaciones:
+Hamburguesas de pollo de 56 g cada una.
+
+Presentación:
+Sachet.
+
+Contenido:
+3 hamburguesas de pollo.
+
+Vida de estantería:
+120 días.
+
+Modo de conservación:
+Congelado a -18 °C.
+
+Precio publicado: Bs 10,60 por envase
+Producto/presentación de referencia en tienda: Hamburguesa Pollo Express - 3 unidades
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/7774112100080
+Fecha de consulta: 24/09/2026
+Los precios pueden variar por sucursal, peso, disponibilidad o fecha.
+
+Observaciones:
+La variedad y la cantidad coinciden, pero el comercio usa un identificador distinto del código de barras impreso en el catálogo; puede corresponder a una actualización de empaque.
+
+Fuente de especificaciones: Catalogo_Sofia_-_0126.pdf, página 66.
+Las especificaciones técnicas se transcribieron del PDF y no se infirieron de la fotografía.
+Fuente de imagen: fotografía comercial, original de 2000 × 2000 píxeles.
+URL de imagen: https://cdn.shopify.com/s/files/1/0517/5495/9018/files/7774112100080.jpg?v=1712345542
+Imagen entregada: PNG RGB de 3840 × 3840 píxeles (formato cuadrado 4K).
+Tratamiento: ampliación convencional Lanczos y enfoque ligero, sin reconstrucción generativa, sin IA y sin modificación de etiquetas.
+El tratamiento aumenta las dimensiones y evita bordes pixelados visibles; no inventa detalle ausente del original.

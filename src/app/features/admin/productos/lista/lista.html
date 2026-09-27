@@ -1,0 +1,66 @@
+<section class="pagina">
+  <app-page-header
+    titulo="Productos"
+    [subtitulo]="
+      cargando() ? 'Cargando catálogo…' : productos().length + ' productos en el catálogo'
+    "
+  >
+    <a routerLink="nuevo" class="btn btn--primary btn--md"
+      ><app-icon name="plus" [size]="18" /> Nuevo producto</a
+    >
+  </app-page-header>
+
+  @if (cargando()) {
+    <div class="skeleton" style="height: 22rem"></div>
+  } @else {
+    <div class="tabla-wrap">
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Nombre</th>
+            <th>SKU</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (p of productos(); track p.id; let i = $index) {
+            <tr class="aparecer" [style.--i]="i">
+              <td>
+                <div class="miniatura">
+                  @if (p.imagen) {
+                    <img [src]="p.imagen" [alt]="p.nombre" width="40" height="40" loading="lazy" />
+                  } @else {
+                    <span class="miniatura__vacia" aria-hidden="true"
+                      ><app-icon name="package" [size]="18"
+                    /></span>
+                  }
+                </div>
+              </td>
+              <td>{{ p.nombre }}</td>
+              <td>{{ p.sku }}</td>
+              <td>{{ p.categorias_producto?.nombre }}</td>
+              <td>{{ p.precio_base !== null ? 'Bs ' + p.precio_base.toFixed(2) : '—' }}</td>
+              <td>
+                <app-badge [tone]="p.estado ? 'success' : 'neutral'">{{
+                  p.estado ? 'Activo' : 'Inactivo'
+                }}</app-badge>
+              </td>
+              <td>
+                <div class="tabla__acciones">
+                  <a [routerLink]="[p.id]">Editar</a>
+                  <button type="button" (click)="alternarEstado(p.id, p.estado)">
+                    {{ p.estado ? 'Desactivar' : 'Activar' }}
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>

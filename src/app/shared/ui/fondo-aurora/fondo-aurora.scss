@@ -1,0 +1,90 @@
+// Detrás de todo el contenido. El texto nunca va directo sobre las manchas
+// de mayor saturación: la opacidad es baja y el desenfoque alto, de modo que
+// el fondo efectivo se mantiene casi blanco (contraste AA intacto).
+:host {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.aurora {
+  position: absolute;
+  inset: -10%;
+  filter: blur(70px) saturate(120%);
+}
+
+.aurora__mancha {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+  mix-blend-mode: multiply;
+}
+
+.aurora__mancha--1 {
+  width: 46vmax;
+  height: 46vmax;
+  top: -12%;
+  left: -10%;
+  background: radial-gradient(circle at 40% 40%, rgb(127 72 155 / 26%), transparent 65%);
+  animation: derivar-1 42s ease-in-out infinite alternate;
+}
+
+.aurora__mancha--2 {
+  width: 40vmax;
+  height: 40vmax;
+  top: 8%;
+  right: -12%;
+  background: radial-gradient(circle at 50% 50%, rgb(247 191 190 / 55%), transparent 65%);
+  animation: derivar-2 50s ease-in-out infinite alternate;
+}
+
+.aurora__mancha--3 {
+  width: 38vmax;
+  height: 38vmax;
+  bottom: -18%;
+  left: 22%;
+  background: radial-gradient(circle at 50% 50%, rgb(242 146 147 / 22%), transparent 65%);
+  animation: derivar-3 58s ease-in-out infinite alternate;
+}
+
+.aurora__mancha--4 {
+  width: 30vmax;
+  height: 30vmax;
+  bottom: 5%;
+  right: 8%;
+  background: radial-gradient(circle at 50% 50%, rgb(196 170 230 / 30%), transparent 65%);
+  animation: derivar-4 46s ease-in-out infinite alternate;
+}
+
+// Textura de puntos muy tenue, más visible arriba y desvanecida abajo.
+.puntos {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgb(83 33 94 / 9%) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 80% 55% at 50% 0%, #000 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 55% at 50% 0%, #000 20%, transparent 75%);
+}
+
+@keyframes derivar-1 {
+  to {
+    transform: translate(8vw, 10vh) scale(1.15) rotate(20deg);
+  }
+}
+@keyframes derivar-2 {
+  to {
+    transform: translate(-9vw, 8vh) scale(1.12) rotate(-15deg);
+  }
+}
+@keyframes derivar-3 {
+  to {
+    transform: translate(6vw, -8vh) scale(1.1);
+  }
+}
+@keyframes derivar-4 {
+  to {
+    transform: translate(-6vw, -10vh) scale(1.2);
+  }
+}

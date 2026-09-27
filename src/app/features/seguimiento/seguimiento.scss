@@ -1,0 +1,123 @@
+.seguimiento {
+  min-height: calc(100dvh - 12rem);
+  display: flex;
+  flex-direction: column;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding: var(--space-6) var(--page-gutter);
+}
+
+.seguimiento--carga {
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+}
+
+.seguimiento__volver {
+  align-self: flex-start;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+  background-image: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+.escena {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-2);
+  width: 100%;
+  max-width: 30rem;
+  margin: auto;
+  padding: var(--space-7) var(--space-6);
+  border-radius: var(--radius-lg);
+  background: rgb(255 255 255 / 80%);
+  border: 1px solid rgb(255 255 255 / 60%);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  animation: aparecer var(--duration-slow) var(--ease-out) both;
+
+  p {
+    margin-inline: auto;
+  }
+
+  app-button ::ng-deep .btn {
+    margin-top: var(--space-3);
+  }
+}
+
+.codigo {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  letter-spacing: 0.02em;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.mensaje {
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-4);
+}
+
+.camion {
+  width: 220px;
+  height: 110px;
+  margin-bottom: var(--space-3);
+}
+
+// Animación en bucle: la caja rebota levemente y las ruedas giran, mientras
+// una franja de "asfalto" con guiones se desplaza para sugerir movimiento.
+// prefers-reduced-motion congela esto vía la regla global de _base.scss
+// (animation-duration casi cero) — queda una ilustración estática equivalente.
+.camion--animado {
+  .camion__cuerpo {
+    animation: rebote 1.1s ease-in-out infinite;
+  }
+
+  .rueda {
+    transform-origin: center;
+    animation: girar 0.6s linear infinite;
+  }
+}
+
+@keyframes rebote {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.carita {
+  width: 140px;
+  height: 140px;
+  margin-bottom: var(--space-3);
+  animation: aparecer 400ms var(--ease-standard);
+}
+
+@keyframes aparecer {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

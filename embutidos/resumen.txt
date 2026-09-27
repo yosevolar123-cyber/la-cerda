@@ -1,0 +1,279 @@
+﻿EMBUTIDOS SOFÍA - 25 PRODUCTOS - VERSIÓN REVISADA
+Contenido: 25 PNG + 25 TXT de producto + resumen.txt = 51 archivos.
+Todas las imágenes PNG tienen 2000 × 2000 píxeles.
+21 fotografías de comercios publicadas a 2000 × 2000; 4 imágenes del catálogo ampliadas convencionalmente, con menor detalle de origen. No se usó IA para reconstruir envases o letras.
+Las fotografías comerciales pueden mostrar un diseño de envase distinto al del catálogo. Las especificaciones siguen siendo las del PDF adjunto.
+Consulta de precios: 22/09/2026. Moneda: bolivianos (Bs). Los precios pueden variar según fecha, sucursal, peso y disponibilidad.
+Precio aproximado indica peso variable, presentación no confirmada completamente o cálculo explícito. Las discrepancias del catálogo se señalan en las fichas.
+Fuente técnica: Catalogo_Sofia_-_0126.pdf adjunto. Fuentes de precio e imagen detalladas debajo y en cada TXT.
+
+01. Mortadela Jamonada en barra 500 g
+Código del producto: 530005
+Precio publicado: Bs 31,50 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/900710237034
+Fecha de consulta: 22/09/2026
+Archivos: Mortadela_Jamonada_en_barra_500_g.png / Mortadela_Jamonada_en_barra_500_g.txt
+Observaciones: La presentación anunciada por el comercio coincide con la seleccionada del catálogo.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0517/5495/9018/files/900710237034.jpg?v=1745210923
+
+02. Mortadela Jamonada al vacío 200 g
+Código del producto: 530305
+Precio publicado: Bs 17,60 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/360031
+Fecha de consulta: 22/09/2026
+Archivos: Mortadela_Jamonada_al_vacio_200_g.png / Mortadela_Jamonada_al_vacio_200_g.txt
+Observaciones: La ficha del catálogo agrupa 105 g (530303) y 200 g (530305); se seleccionó solamente 200 g.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0517/5495/9018/files/360031.jpg?v=1712345786
+
+03. Mortadela de Gallina en barra 500 g
+Código del producto: 530004
+Precio publicado: Bs 25,40 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/7774112100677
+Fecha de consulta: 22/09/2026
+Archivos: Mortadela_de_Gallina_en_barra_500_g.png / Mortadela_de_Gallina_en_barra_500_g.txt
+Observaciones: La presentación anunciada por el comercio coincide con la seleccionada del catálogo.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0517/5495/9018/files/7774112100677.jpg?v=1745210923
+
+04. Mortadela Primavera en barra 500 g
+Código del producto: 530033
+Precio publicado: Bs 27,90 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/7774112101957
+Fecha de consulta: 22/09/2026
+Archivos: Mortadela_Primavera_en_barra_500_g.png / Mortadela_Primavera_en_barra_500_g.txt
+Observaciones: La presentación anunciada por el comercio coincide con la seleccionada del catálogo.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0517/5495/9018/files/7774112101957.jpg?v=1745210923
+
+05. Mortadela Primavera al vacío 200 g
+Código del producto: 530306
+Precio publicado: Bs 13,40 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/360032
+Fecha de consulta: 22/09/2026
+Archivos: Mortadela_Primavera_al_vacio_200_g.png / Mortadela_Primavera_al_vacio_200_g.txt
+Observaciones: La presentación anunciada por el comercio coincide con la seleccionada del catálogo.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0517/5495/9018/files/360032.jpg?v=1712345793
+
+06. Jamón Sandwichero al vacío 250 g
+Código del producto: 531805
+Precio publicado: Bs 21,80 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/360026
+Fecha de consulta: 22/09/2026
+Archivos: Jamon_Sandwichero_al_vacio_250_g.png / Jamon_Sandwichero_al_vacio_250_g.txt
+Observaciones: La presentación anunciada por el comercio coincide con la seleccionada del catálogo.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0517/5495/9018/files/360026.jpg?v=1712345784
+
+07. Jamón Ahumado de Cerdo al vacío 250 g
+Código del producto: 531807
+Precio publicado: Bs 27,10 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/360027
+Fecha de consulta: 22/09/2026
+Archivos: Jamon_Ahumado_de_Cerdo_al_vacio_250_g.png / Jamon_Ahumado_de_Cerdo_al_vacio_250_g.txt
+Observaciones: La presentación anunciada por el comercio coincide con la seleccionada del catálogo.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0517/5495/9018/files/360027.jpg?v=1712345779
+
+08. Jamón Inglés en barra
+Código del producto: 531506
+Precio aproximado: Bs 197,60 a Bs 217,36 por barra de 2 a 2,2 kg
+Fuente del precio: Hipermaxi Circunvalación, Cochabamba
+URL: https://www.hipermaxi.com/cochabamba/hipermaxi-circunvalacion/producto/679789/jamon-ingles-sofia-kg
+Fecha de consulta: 22/09/2026
+Archivos: Jamon_Ingles_en_barra.png / Jamon_Ingles_en_barra.txt
+Observaciones: Cálculo: Bs 98,80/kg × 2 a 2,2 kg del catálogo. No es un precio publicado por barra completa. Precio de Bs 98,80/kg confirmado también en la ficha directa del comercio el 22/09/2026.
+Imagen: PDF adjunto, página 27. Ampliación convencional a 2000 × 2000; detalle limitado por el original.
+
+09. Chorizo Parrillero al vacío 1 kg
+Código del producto: 533328
+Precio aproximado: Bs 70,30 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/900901062827
+Fecha de consulta: 22/09/2026
+Archivos: Chorizo_Parrillero_al_vacio_1_kg.png / Chorizo_Parrillero_al_vacio_1_kg.txt
+Observaciones: La tienda anuncia 1 kg aproximado; el total puede variar con el peso.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0517/5495/9018/files/900901062827.jpg?v=1712346194
+
+10. Chorizo Churrasquero al vacío 1 kg
+Código del producto: 533329
+Precio aproximado: Bs 70,80 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/900901062780
+Fecha de consulta: 22/09/2026
+Archivos: Chorizo_Churrasquero_al_vacio_1_kg.png / Chorizo_Churrasquero_al_vacio_1_kg.txt
+Observaciones: La tienda anuncia 1 kg aproximado; el total puede variar con el peso.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0517/5495/9018/files/900901062780.jpg?v=1712346193
+
+11. Chorizo Churrasquero al vacío 5 unidades
+Código del producto: 533348
+Precio publicado: Bs 32,30 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/900228
+Fecha de consulta: 22/09/2026
+Archivos: Chorizo_Churrasquero_al_vacio_5_unidades.png / Chorizo_Churrasquero_al_vacio_5_unidades.txt
+Observaciones: La presentación anunciada por el comercio coincide con la seleccionada del catálogo.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0517/5495/9018/files/900228.jpg?v=1712346156
+
+12. Chorizo de Res al vacío 1 kg
+Código del producto: 533330
+Precio aproximado: Bs 68,90 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/900901062803
+Fecha de consulta: 22/09/2026
+Archivos: Chorizo_de_Res_al_vacio_1_kg.png / Chorizo_de_Res_al_vacio_1_kg.txt
+Observaciones: La tienda anuncia 1 kg aproximado; el total puede variar con el peso.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0517/5495/9018/files/900901062803.jpg?v=1712346195
+
+13. Salchicha Frankfurt de 14 cm al vacío 10 unidades
+Código del producto: 534510
+Precio aproximado: Bs 28,10 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/360035
+Fecha de consulta: 22/09/2026
+Archivos: Salchicha_Frankfurt_de_14_cm_al_vacio_10_unidades.png / Salchicha_Frankfurt_de_14_cm_al_vacio_10_unidades.txt
+Observaciones: Coinciden la variedad y el número de unidades, pero el título comercial no confirma el peso del catálogo. Se conserva el precio del envase anunciado, sin recalcular.
+Imagen: PDF adjunto, página 34. Ampliación convencional a 2000 × 2000; detalle limitado por el original.
+
+14. Salchicha Frankfurt Extra Larga al vacío 12 unidades
+Código del producto: 534511
+Precio aproximado: Bs 52,70 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/534511
+Fecha de consulta: 22/09/2026
+Archivos: Salchicha_Frankfurt_Extra_Larga_al_vacio_12_unidades.png / Salchicha_Frankfurt_Extra_Larga_al_vacio_12_unidades.txt
+Observaciones: Coinciden la variedad y el número de unidades, pero el título comercial no confirma el peso del catálogo. Se conserva el precio del envase anunciado, sin recalcular.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0517/5495/9018/files/534511.jpg?v=1712346194
+
+15. Salchicha Viena al vacío 350 g
+Código del producto: 534513
+Precio aproximado: Bs 25,30 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/9009953
+Fecha de consulta: 22/09/2026
+Archivos: Salchicha_Viena_al_vacio_350_g.png / Salchicha_Viena_al_vacio_350_g.txt
+Observaciones: Coinciden la variedad y el número de unidades, pero el título comercial no confirma el peso del catálogo. Se conserva el precio del envase anunciado, sin recalcular.
+Imagen: PDF adjunto, página 34. Ampliación convencional a 2000 × 2000; detalle limitado por el original.
+
+16. Mini Salchicha de Pollo al vacío 10 unidades
+Código del producto: 534504
+Precio aproximado: Bs 17,20 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/900710239816
+Fecha de consulta: 22/09/2026
+Archivos: Mini_Salchicha_de_Pollo_al_vacio_10_unidades.png / Mini_Salchicha_de_Pollo_al_vacio_10_unidades.txt
+Observaciones: Coinciden la variedad y el número de unidades, pero el título comercial no confirma el peso del catálogo. Se conserva el precio del envase anunciado, sin recalcular.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0517/5495/9018/files/900710239816.jpg?v=1712346192
+
+17. Mini Salchicha de Pollo al vacío 20 unidades
+Código del producto: 534505
+Precio aproximado: Bs 29,20 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/900710239823
+Fecha de consulta: 22/09/2026
+Archivos: Mini_Salchicha_de_Pollo_al_vacio_20_unidades.png / Mini_Salchicha_de_Pollo_al_vacio_20_unidades.txt
+Observaciones: Coinciden la variedad y el número de unidades, pero el título comercial no confirma el peso del catálogo. Se conserva el precio del envase anunciado, sin recalcular.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0517/5495/9018/files/900710239823.jpg?v=1712346197
+
+18. Mini Salchicha Frankfurt al vacío 10 unidades
+Código del producto: 534506
+Precio aproximado: Bs 17,40 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/360034
+Fecha de consulta: 22/09/2026
+Archivos: Mini_Salchicha_Frankfurt_al_vacio_10_unidades.png / Mini_Salchicha_Frankfurt_al_vacio_10_unidades.txt
+Observaciones: Coinciden la variedad y el número de unidades, pero el título comercial no confirma el peso del catálogo. Se conserva el precio del envase anunciado, sin recalcular.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0517/5495/9018/files/360034.jpg?v=1712345793
+
+19. Mini Salchicha Frankfurt al vacío 20 unidades
+Código del producto: 534507
+Precio aproximado: Bs 29,90 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/900710239809
+Fecha de consulta: 22/09/2026
+Archivos: Mini_Salchicha_Frankfurt_al_vacio_20_unidades.png / Mini_Salchicha_Frankfurt_al_vacio_20_unidades.txt
+Observaciones: Coinciden la variedad y el número de unidades, pero el título comercial no confirma el peso del catálogo. Se conserva el precio del envase anunciado, sin recalcular.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0517/5495/9018/files/900710239809.jpg?v=1712346192
+
+20. Mini Salchicha de Res al vacío 10 unidades
+Código del producto: 534508
+Precio aproximado: Bs 18,80 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/900901043505
+Fecha de consulta: 22/09/2026
+Archivos: Mini_Salchicha_de_Res_al_vacio_10_unidades.png / Mini_Salchicha_de_Res_al_vacio_10_unidades.txt
+Observaciones: Coinciden la variedad y el número de unidades, pero el título comercial no confirma el peso del catálogo. Se conserva el precio del envase anunciado, sin recalcular.
+Imagen: PDF adjunto, página 37. Ampliación convencional a 2000 × 2000; detalle limitado por el original.
+
+21. Salchicha Cocktelera al vacío 250 g
+Código del producto: 534518
+Precio publicado: Bs 20,80 por envase
+Fuente del precio: Amarket, Bolivia
+URL: https://amarket.com.bo/products/900901061950
+Fecha de consulta: 22/09/2026
+Archivos: Salchicha_Cocktelera_al_vacio_250_g.png / Salchicha_Cocktelera_al_vacio_250_g.txt
+Observaciones: La presentación anunciada por el comercio coincide con la seleccionada del catálogo.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0517/5495/9018/files/900901061950.jpg?v=1712346196
+
+22. Paté de Hígado de Cerdo 240 g
+Código del producto: 535805
+Precio aproximado: Bs 11,50 por barra
+Fuente del precio: Agave Micromercado, Cochabamba
+URL: https://www.agavemicromercado.com/categoria/refrigerado-y-congelado/fiambres-y-embutidos/pate/
+Fecha de consulta: 22/09/2026
+Archivos: Pate_de_Higado_de_Cerdo_240_g.png / Pate_de_Higado_de_Cerdo_240_g.txt
+Observaciones: Discrepancia del catálogo: el título dice 240 g y la presentación dice 220 g. La tienda vende 240 g; este precio corresponde a 240 g y se usa como referencia, no como precio exacto de 220 g.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0368/1363/5716/files/7774112100585.jpg?v=1714441485
+
+23. Paté de Hígado de Cerdo 100 g
+Código del producto: 535801
+Precio publicado: Bs 6,00 por barra
+Fuente del precio: Agave Micromercado, Cochabamba
+URL: https://www.agavemicromercado.com/categoria/refrigerado-y-congelado/fiambres-y-embutidos/pate/
+Fecha de consulta: 22/09/2026
+Archivos: Pate_de_Higado_de_Cerdo_100_g.png / Pate_de_Higado_de_Cerdo_100_g.txt
+Observaciones: La presentación anunciada por el comercio coincide con la seleccionada del catálogo.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0368/1363/5716/files/7774112100578.jpg?v=1714441485
+
+24. Paté de Hígado de Pollo 240 g
+Código del producto: 535702
+Precio aproximado: Bs 11,50 por barra
+Fuente del precio: Agave Micromercado, Cochabamba
+URL: https://www.agavemicromercado.com/categoria/refrigerado-y-congelado/fiambres-y-embutidos/pate/
+Fecha de consulta: 22/09/2026
+Archivos: Pate_de_Higado_de_Pollo_240_g.png / Pate_de_Higado_de_Pollo_240_g.txt
+Observaciones: Discrepancia del catálogo: el título dice 240 g y la presentación dice 220 g. La tienda vende 240 g; este precio corresponde a 240 g y se usa como referencia, no como precio exacto de 220 g.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0368/1363/5716/files/7774112100561.jpg?v=1714441484
+
+25. Paté de Hígado de Pollo 100 g
+Código del producto: 535700
+Precio publicado: Bs 5,50 por barra
+Fuente del precio: Agave Micromercado, Cochabamba
+URL: https://www.agavemicromercado.com/categoria/refrigerado-y-congelado/fiambres-y-embutidos/pate/
+Fecha de consulta: 22/09/2026
+Archivos: Pate_de_Higado_de_Pollo_100_g.png / Pate_de_Higado_de_Pollo_100_g.txt
+Observaciones: La presentación anunciada por el comercio coincide con la seleccionada del catálogo.
+Imagen: fotografía comercial publicada a 2000 × 2000 píxeles.
+Fuente de imagen: https://cdn.shopify.com/s/files/1/0368/1363/5716/files/7774112100554.jpg?v=1714441485

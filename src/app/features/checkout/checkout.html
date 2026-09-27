@@ -1,0 +1,102 @@
+<section class="pagina pagina--media">
+  @if (pedidoConfirmado(); as confirmado) {
+    <div class="exito">
+      <div class="exito__sello"><app-icon name="check" [size]="32" /></div>
+      <h1>¡Pedido registrado!</h1>
+      <p class="texto-meta">Tu código de pedido es</p>
+      <p class="exito__codigo">{{ confirmado.codigo }}</p>
+      <p>Envíanoslo por WhatsApp para coordinar la entrega y el pago.</p>
+      <div class="exito__acciones">
+        <a
+          [href]="confirmado.enlaceWhatsapp"
+          target="_blank"
+          rel="noopener"
+          class="btn btn--whatsapp btn--lg"
+          >Enviar pedido por WhatsApp</a
+        >
+        <a
+          [routerLink]="['/mis-pedidos', confirmado.id, 'seguimiento']"
+          class="btn btn--secondary btn--lg"
+        >
+          Ver seguimiento <app-icon name="arrow-right" [size]="18" />
+        </a>
+        <button type="button" class="exito__volver" (click)="volverAlCatalogo()">
+          Seguir comprando
+        </button>
+      </div>
+    </div>
+  } @else if (cart.items().length === 0) {
+    <div class="vacio aparecer">
+      <p class="vacio__titulo">Tu carrito está vacío</p>
+      <p>Agrega productos del catálogo para armar tu pedido.</p>
+      <a routerLink="/catalogo" class="btn btn--primary btn--md">Ir al catálogo</a>
+    </div>
+  } @else {
+    <app-page-header
+      titulo="Confirmar pedido"
+      subtitulo="Dinos dónde entregarlo y te contactamos por WhatsApp."
+      volverRuta="/catalogo"
+      volverTexto="Catálogo"
+    />
+
+    <div class="columnas">
+      <form [formGroup]="form" (ngSubmit)="confirmar()" novalidate class="panel">
+        <h2><app-icon name="map-pin" [size]="20" /> Entrega</h2>
+
+        @if (error()) {
+          <p class="field__error" role="alert">{{ error() }}</p>
+        }
+
+        <div class="field">
+          <label class="field__label" for="direccion">Dirección de entrega</label>
+          <textarea
+            id="direccion"
+            class="textarea"
+            formControlName="direccion"
+            placeholder="Calle, número, zona, referencia…"
+          ></textarea>
+          <app-field-error [control]="direccion" />
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="enlaceUbicacion"
+            >Enlace de Google Maps <span class="texto-meta">(opcional)</span></label
+          >
+          <input
+            id="enlaceUbicacion"
+            class="input"
+            type="url"
+            formControlName="enlaceUbicacion"
+            placeholder="https://maps.app.goo.gl/…"
+          />
+          <span class="field__hint"
+            >Comparte tu ubicación desde Google Maps y pega el enlace aquí.</span
+          >
+        </div>
+
+        <app-button type="submit" size="lg" [loading]="enviando()">
+          Confirmar pedido <app-icon name="arrow-right" [size]="18" />
+        </app-button>
+      </form>
+
+      <aside class="resumen aparecer" [style.--i]="1">
+        <h3>Tu pedido</h3>
+        <ul class="resumen__lista">
+          @for (item of cart.items(); track item.productoId) {
+            <li>
+              <span
+                ><b>{{ item.cantidad }}×</b> {{ item.nombre }}</span
+              >
+              <span>Bs {{ (item.cantidad * item.precio).toFixed(2) }}</span>
+            </li>
+          }
+        </ul>
+        <div class="resumen__total">
+          <span>Total</span>
+          <strong>Bs {{ cart.total().toFixed(2) }}</strong>
+        </div>
+        <p class="texto-meta">El costo de envío se confirma por WhatsApp.</p>
+      </aside>
+    </div>
+  }
+</section>

@@ -1,0 +1,25 @@
+<div class="pagina venta-shell__cabecera">
+  <app-page-header
+    titulo="Nueva venta de mostrador"
+    subtitulo="Busca productos, agrégalos y confirma la venta desde el carrito."
+    volverRuta="/secretaria"
+    volverTexto="Pedidos"
+  >
+    <button
+      type="button"
+      class="btn btn--secondary btn--md venta-shell__carrito"
+      (click)="cart.abrir()"
+    >
+      <app-icon name="bag" [size]="18" />
+      Carrito
+      @if (cart.cantidadTotal() > 0) {
+        <span class="venta-shell__contador">{{ cart.cantidadTotal() }}</span>
+        <span class="venta-shell__total">Bs {{ cart.total().toFixed(2) }}</span>
+      }
+    </button>
+  </app-page-header>
+</div>
+
+<router-outlet />
+
+<app-cart-drawer rutaCheckout="/secretaria/venta/confirmar" textoBoton="Continuar venta" />

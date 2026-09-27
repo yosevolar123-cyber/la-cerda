@@ -1,0 +1,123 @@
+<section class="pagina">
+  <app-page-header
+    titulo="Dashboard"
+    subtitulo="Cómo van las ventas, el stock y el catálogo de un vistazo."
+  >
+    <a routerLink="/admin/reportes" class="btn btn--secondary btn--md">
+      <app-icon name="file-text" [size]="18" /> Reporte PDF
+    </a>
+    <a routerLink="/admin/productos/nuevo" class="btn btn--primary btn--md">
+      <app-icon name="plus" [size]="18" /> Nuevo producto
+    </a>
+  </app-page-header>
+
+  @if (cargando()) {
+    <div class="grid-stats">
+      @for (i of [1, 2, 3, 4]; track i) {
+        <div class="skeleton" style="height: 9rem"></div>
+      }
+    </div>
+  } @else if (stats(); as s) {
+    <div class="grid-stats">
+      <app-stat-card
+        class="aparecer"
+        [style.--i]="0"
+        icono="trending-up"
+        etiqueta="Ventas hoy"
+        [valor]="'Bs ' + s.ventasHoy.toFixed(0)"
+        [variacion]="variacion(s.ventasHoy, s.ventasAyer)"
+        referencia="vs. ayer"
+      />
+      <app-stat-card
+        class="aparecer"
+        [style.--i]="1"
+        icono="bar-chart"
+        etiqueta="Esta semana"
+        tono="secundario"
+        [valor]="'Bs ' + s.ventasSemana.toFixed(0)"
+        [variacion]="variacion(s.ventasSemana, s.ventasSemanaAnterior)"
+        referencia="vs. semana pasada"
+      />
+      <app-stat-card
+        class="aparecer"
+        [style.--i]="2"
+        icono="package"
+        etiqueta="Productos activos"
+        tono="rosa"
+        [valor]="s.totalProductos"
+      />
+      <app-stat-card
+        class="aparecer"
+        [style.--i]="3"
+        icono="alert-triangle"
+        etiqueta="Lotes con stock bajo"
+        [tono]="s.bajoStock > 0 ? 'alerta' : 'exito'"
+        [valor]="s.bajoStock"
+      />
+    </div>
+
+    <div class="panel-principal">
+      <app-card class="aparecer grafico-card" [style.--i]="4">
+        <div class="card-cabecera">
+          <div>
+            <h2>Ventas de los últimos 14 días</h2>
+            <p class="texto-meta">
+              Este mes: <strong>Bs {{ s.ventasMes.toFixed(2) }}</strong>
+            </p>
+          </div>
+        </div>
+        <div class="grafico-wrap" [class.grafico-wrap--vacio]="!hayDatosParaGraficar()">
+          <canvas #canvasVentas [hidden]="!hayDatosParaGraficar()"></canvas>
+          @if (!hayDatosParaGraficar()) {
+            <div class="grafico-vacio">
+              <app-icon name="bar-chart" [size]="28" />
+              <p>Aún no hay suficientes ventas para graficar.</p>
+            </div>
+          }
+        </div>
+      </app-card>
+
+      <div class="lateral">
+        <app-card class="aparecer" [style.--i]="5">
+          <h2>Ranking</h2>
+          <div class="ranking">
+            <div class="ranking__fila">
+              <span class="ranking__medalla ranking__medalla--oro">1</span>
+              <div>
+                <span class="texto-meta">Más vendido</span>
+                <p>{{ s.masVendido ? s.masVendido.nombre : 'Sin ventas todavía' }}</p>
+              </div>
+              @if (s.masVendido) {
+                <strong>{{ s.masVendido.cantidad }} u.</strong>
+              }
+            </div>
+            <div class="ranking__fila">
+              <span class="ranking__medalla">↓</span>
+              <div>
+                <span class="texto-meta">Menos vendido</span>
+                <p>{{ s.menosVendido ? s.menosVendido.nombre : 'Faltan ventas para comparar' }}</p>
+              </div>
+              @if (s.menosVendido) {
+                <strong>{{ s.menosVendido.cantidad }} u.</strong>
+              }
+            </div>
+          </div>
+        </app-card>
+
+        <nav class="accesos aparecer" [style.--i]="6" aria-label="Accesos rápidos">
+          <a routerLink="/admin/productos" class="acceso bloque"
+            ><app-icon name="package" [size]="18" /> Productos
+            <app-icon name="arrow-right" [size]="16"
+          /></a>
+          <a routerLink="/admin/inventario" class="acceso bloque"
+            ><app-icon name="truck" [size]="18" /> Inventario
+            <app-icon name="arrow-right" [size]="16"
+          /></a>
+          <a routerLink="/admin/usuarios" class="acceso bloque"
+            ><app-icon name="user" [size]="18" /> Usuarios <app-icon name="arrow-right" [size]="16"
+          /></a>
+        </nav>
+      </div>
+    </div>
+  }
+</section>

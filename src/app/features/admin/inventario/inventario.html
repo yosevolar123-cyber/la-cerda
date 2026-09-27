@@ -1,0 +1,118 @@
+<section class="pagina admin-inventario">
+  <app-page-header
+    titulo="Inventario"
+    subtitulo="Stock por almacén, con alertas de stock bajo y lotes por vencer."
+  >
+    <app-button
+      [variant]="mostrarFormulario() ? 'secondary' : 'primary'"
+      (click)="mostrarFormulario.set(!mostrarFormulario())"
+    >
+      @if (mostrarFormulario()) {
+        <app-icon name="x" [size]="18" /> Cancelar
+      } @else {
+        <app-icon name="plus" [size]="18" /> Registrar entrada
+      }
+    </app-button>
+  </app-page-header>
+
+  @if (mostrarFormulario()) {
+    <app-card>
+      <form [formGroup]="form" (ngSubmit)="registrarEntrada()" novalidate class="entrada-form">
+        @if (error()) {
+          <p class="field__error" role="alert">{{ error() }}</p>
+        }
+        <div class="field">
+          <label class="field__label" for="productoId">Producto</label>
+          <select id="productoId" class="select" formControlName="productoId">
+            <option value="" disabled>Selecciona un producto</option>
+            @for (p of productos(); track p.id) {
+              <option [value]="p.id">{{ p.nombre }}</option>
+            }
+          </select>
+        </div>
+        <div class="field">
+          <label class="field__label" for="almacenId">Almacén</label>
+          <select id="almacenId" class="select" formControlName="almacenId">
+            <option value="" disabled>Selecciona un almacén</option>
+            @for (a of almacenes(); track a.id) {
+              <option [value]="a.id">{{ a.nombre }}</option>
+            }
+          </select>
+        </div>
+        <div class="field">
+          <label class="field__label" for="cantidad">Cantidad</label>
+          <input id="cantidad" class="input" type="number" min="1" formControlName="cantidad" />
+        </div>
+        <div class="field">
+          <label class="field__label" for="fechaVencimiento">Fecha de vencimiento del lote</label>
+          <input
+            id="fechaVencimiento"
+            class="input"
+            type="date"
+            formControlName="fechaVencimiento"
+          />
+        </div>
+        <app-button type="submit" [loading]="guardando()">Registrar entrada</app-button>
+      </form>
+
+      @if (almacenes().length === 0) {
+        <div class="crear-almacen">
+          <p class="field__hint">Todavía no hay almacenes. Crea el primero:</p>
+          <input
+            class="input"
+            type="text"
+            placeholder="Nombre del almacén"
+            [value]="nuevoAlmacenNombre()"
+            (input)="nuevoAlmacenNombre.set($any($event.target).value)"
+          />
+          <app-button size="sm" (click)="crearAlmacen()">Crear almacén</app-button>
+        </div>
+      }
+    </app-card>
+  }
+
+  @if (cargando()) {
+    <p class="estado-carga">Cargando…</p>
+  } @else if (inventario().length === 0) {
+    <p class="estado-carga">Todavía no hay stock registrado.</p>
+  } @else {
+    <div class="tabla-wrap">
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Almacén</th>
+            <th>Disponible</th>
+            <th>Vencimiento</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (i of inventario(); track i.id) {
+            <tr>
+              <td>{{ i.productos?.nombre }}</td>
+              <td>{{ i.almacenes?.nombre }}</td>
+              <td>
+                {{ i.cantidad_disponible }}
+                @if (esBajoStock(i.cantidad_disponible)) {
+                  <app-badge tone="danger" [stamp]="true">Bajo</app-badge>
+                }
+              </td>
+              <td>
+                {{ i.lotes_produccion?.fecha_vencimiento }}
+                @if (proximoAVencer(i.lotes_produccion?.fecha_vencimiento)) {
+                  <app-badge tone="warning" [stamp]="true">Por vencer</app-badge>
+                }
+              </td>
+              <td>
+                <div class="tabla__acciones">
+                  <button type="button" (click)="registrarSalida(i.id)">Registrar salida</button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>

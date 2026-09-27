@@ -1,0 +1,12 @@
+@use 'styles/tokens';
+@use 'styles/base';
+@use 'styles/forms';
+@use 'styles/tabla';
+@use 'styles/chip';
+@use 'styles/buttons';
+@use 'styles/animaciones';
+@use 'styles/auth';
+
+// Google Fonts — Fredoka (display, echoes the logo's rounded bold wordmark)
+// paired with Work Sans (body/UI, legible at data-dense secretaria/admin views).
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap');

@@ -1,0 +1,269 @@
+:host {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  // Queda fuera del fundido de las transiciones de ruta: solo cambia el contenido.
+  view-transition-name: header;
+}
+
+.header {
+  background: var(--color-surface-glass);
+  backdrop-filter: saturate(160%) blur(16px);
+  -webkit-backdrop-filter: saturate(160%) blur(16px);
+  border-bottom: 1px solid transparent;
+  transition:
+    box-shadow var(--duration-base) var(--ease-standard),
+    border-color var(--duration-base) var(--ease-standard),
+    background-color var(--duration-base) var(--ease-standard);
+}
+
+.header--desplazado,
+.header--abierto {
+  background: rgb(255 255 255 / 88%);
+  border-bottom-color: var(--color-border);
+  box-shadow: 0 6px 24px rgb(83 33 94 / 7%);
+}
+
+.header__bar {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: var(--space-3) var(--page-gutter);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.header__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-md);
+  letter-spacing: -0.01em;
+  color: var(--color-primary);
+  margin-right: auto;
+  background-image: none;
+
+  img {
+    border-radius: var(--radius-sm);
+    transition: transform var(--duration-slow) var(--ease-spring);
+  }
+
+  &:hover img {
+    transform: rotate(-8deg) scale(1.06);
+  }
+}
+
+// --- Navegación --------------------------------------------------------------------
+.header__nav {
+  display: none;
+}
+
+.header__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.header__link {
+  position: relative;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background-image: none;
+  transition:
+    color var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard);
+
+  // Indicador: punto que crece bajo el enlace activo.
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 2px;
+    width: 18px;
+    height: 3px;
+    border-radius: var(--radius-pill);
+    background: var(--color-primary);
+    transform: translateX(-50%) scaleX(0);
+    transition: transform var(--duration-base) var(--ease-spring);
+  }
+
+  &:hover {
+    color: var(--color-primary);
+    background: var(--color-primary-tint);
+  }
+
+  &.is-active {
+    color: var(--color-primary);
+    font-weight: 600;
+
+    &::after {
+      transform: translateX(-50%) scaleX(1);
+    }
+  }
+}
+
+.header__nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.header__rol-badge {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--color-secondary);
+  background: var(--color-secondary-tint);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+}
+
+// --- Carrito --------------------------------------------------------------------------
+.header__cart {
+  flex-shrink: 0;
+}
+
+.header__cart--rebote {
+  animation: carrito-rebote 450ms var(--ease-spring);
+}
+
+@keyframes carrito-rebote {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.3) rotate(-10deg);
+  }
+  60% {
+    transform: scale(0.94) rotate(5deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+.header__cart-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--color-hocico-dark);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  min-width: 1.15rem;
+  height: 1.15rem;
+  border-radius: var(--radius-pill);
+  border: 2px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+  animation: pop 300ms var(--ease-spring);
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0);
+  }
+}
+
+// --- Botón hamburguesa → X ------------------------------------------------------------
+.header__toggle {
+  flex-direction: column;
+  gap: 4px;
+
+  span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--color-primary);
+    border-radius: 2px;
+    transition:
+      transform var(--duration-base) var(--ease-out),
+      opacity var(--duration-fast) var(--ease-standard);
+  }
+}
+
+.header--abierto .header__toggle span {
+  &:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  &:nth-child(2) {
+    opacity: 0;
+  }
+  &:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+}
+
+// --- Escritorio ------------------------------------------------------------------------
+@media (min-width: 900px) {
+  .header__nav {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+    margin-left: var(--space-5);
+  }
+
+  .header__toggle {
+    display: none;
+  }
+}
+
+// --- Móvil: panel desplegable animado ---------------------------------------------------
+@media (max-width: 899.98px) {
+  .header__nav--open {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: var(--space-4) var(--page-gutter) var(--space-5);
+    background: rgb(255 255 255 / 96%);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+    animation: desplegar var(--duration-base) var(--ease-out);
+  }
+
+  .header__links {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header__link {
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--fs-base);
+
+    &::after {
+      display: none;
+    }
+
+    &.is-active {
+      background: var(--color-primary-tint);
+    }
+  }
+
+  .header__nav-actions {
+    flex-direction: column;
+    align-items: stretch;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border);
+  }
+}
+
+@keyframes desplegar {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}

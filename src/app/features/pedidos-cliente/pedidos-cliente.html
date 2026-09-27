@@ -1,0 +1,46 @@
+<section class="pagina pagina--angosta">
+  <app-page-header
+    titulo="Mis pedidos"
+    subtitulo="Toca un pedido para ver en qué va y confirmar cuando lo recibas."
+  />
+
+  @if (cargando()) {
+    <div class="lista">
+      @for (i of [1, 2, 3]; track i) {
+        <div class="skeleton" style="height: 7rem"></div>
+      }
+    </div>
+  } @else if (pedidos().length === 0) {
+    <div class="vacio aparecer">
+      <p class="vacio__titulo">Todavía no hiciste pedidos</p>
+      <p>Cuando confirmes uno, aparecerá aquí con su estado.</p>
+      <a routerLink="/catalogo" class="btn btn--primary btn--md">Ver el catálogo</a>
+    </div>
+  } @else {
+    <ul class="lista">
+      @for (pedido of pedidos(); track pedido.id; let i = $index) {
+        <li class="aparecer" [style.--i]="i">
+          <a [routerLink]="[pedido.id, 'seguimiento']" class="pedido bloque">
+            <div class="pedido__cabecera">
+              <div>
+                <span class="pedido__codigo">{{ pedido.codigo }}</span>
+                <span class="pedido__fecha">{{ pedido.fecha | date: "d 'de' MMMM, HH:mm" }}</span>
+              </div>
+              <app-badge [tone]="tonoEstado(pedido.estado)">{{
+                ESTADO_UI_LABELS[estadoUI(pedido.estado)]
+              }}</app-badge>
+            </div>
+            <p class="pedido__items">
+              @for (d of pedido.detalle_pedido; track $index; let ultimo = $last) {
+                {{ d.cantidad }}× {{ d.productos?.nombre }}{{ ultimo ? '' : ', ' }}
+              }
+            </p>
+            <span class="pedido__ver"
+              >Ver seguimiento <app-icon name="arrow-right" [size]="16"
+            /></span>
+          </a>
+        </li>
+      }
+    </ul>
+  }
+</section>

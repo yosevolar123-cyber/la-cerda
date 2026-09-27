@@ -1,0 +1,130 @@
+<header
+  class="header"
+  [class.header--desplazado]="desplazado()"
+  [class.header--abierto]="menuAbierto()"
+>
+  <div class="header__bar">
+    <a routerLink="/catalogo" class="header__brand" (click)="cerrarMenu()">
+      <img src="brand/logo-mark.png" alt="" width="36" height="36" />
+      <span>La Cerda</span>
+    </a>
+
+    <nav class="header__nav" [class.header__nav--open]="menuAbierto()" aria-label="Principal">
+      <div class="header__links">
+        @if (!auth.rol() || auth.rol() === 'cliente') {
+          <a
+            class="header__link"
+            routerLink="/catalogo"
+            routerLinkActive="is-active"
+            (click)="cerrarMenu()"
+            >Catálogo</a
+          >
+        }
+
+        @if (auth.rol() === 'cliente') {
+          <a
+            class="header__link"
+            routerLink="/mis-pedidos"
+            routerLinkActive="is-active"
+            (click)="cerrarMenu()"
+            >Mis pedidos</a
+          >
+        }
+
+        @if (auth.rol() === 'vendedor') {
+          <a
+            class="header__link"
+            routerLink="/secretaria"
+            routerLinkActive="is-active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="cerrarMenu()"
+            >Pedidos</a
+          >
+          <a
+            class="header__link"
+            routerLink="/secretaria/venta"
+            routerLinkActive="is-active"
+            (click)="cerrarMenu()"
+            >Vender</a
+          >
+        }
+
+        @if (auth.rol() === 'admin') {
+          <a
+            class="header__link"
+            routerLink="/admin"
+            routerLinkActive="is-active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="cerrarMenu()"
+            >Dashboard</a
+          >
+          <a
+            class="header__link"
+            routerLink="/admin/productos"
+            routerLinkActive="is-active"
+            (click)="cerrarMenu()"
+            >Productos</a
+          >
+          <a
+            class="header__link"
+            routerLink="/admin/inventario"
+            routerLinkActive="is-active"
+            (click)="cerrarMenu()"
+            >Inventario</a
+          >
+          <a
+            class="header__link"
+            routerLink="/admin/usuarios"
+            routerLinkActive="is-active"
+            (click)="cerrarMenu()"
+            >Usuarios</a
+          >
+          <a
+            class="header__link"
+            routerLink="/admin/reportes"
+            routerLinkActive="is-active"
+            (click)="cerrarMenu()"
+            >Reportes</a
+          >
+        }
+      </div>
+
+      <div class="header__nav-actions">
+        @if (auth.autenticado()) {
+          <span class="header__rol-badge">{{ ROLE_LABELS[auth.rol()!] ?? '' }}</span>
+          <app-button variant="ghost" size="sm" (click)="salir()">Cerrar sesión</app-button>
+        } @else {
+          <a class="header__link" routerLink="/auth/login" (click)="cerrarMenu()">Iniciar sesión</a>
+          <app-button size="sm" (click)="router.navigateByUrl('/auth/registro'); cerrarMenu()"
+            >Crear cuenta</app-button
+          >
+        }
+      </div>
+    </nav>
+
+    @if (!auth.rol() || auth.rol() === 'cliente') {
+      <button
+        type="button"
+        class="btn-icono header__cart"
+        [class.header__cart--rebote]="animarCarrito()"
+        (click)="cart.abrir(); cerrarMenu()"
+        aria-label="Abrir carrito"
+      >
+        <app-icon name="bag" [size]="22" />
+        @if (cart.cantidadTotal() > 0) {
+          <span class="header__cart-badge">{{ cart.cantidadTotal() }}</span>
+        }
+      </button>
+    }
+
+    <button
+      class="btn-icono header__toggle"
+      type="button"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="menuAbierto()"
+      [attr.aria-label]="menuAbierto() ? 'Cerrar menú' : 'Abrir menú'"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>

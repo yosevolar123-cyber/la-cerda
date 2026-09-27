@@ -1,0 +1,119 @@
+@if (cargando()) {
+  <div class="seguimiento seguimiento--carga">Cargando…</div>
+} @else if (pedido(); as p) {
+  <section class="seguimiento">
+    <a routerLink="/mis-pedidos" class="seguimiento__volver">‹ Mis pedidos</a>
+
+    @switch (grupo()) {
+      @case ('pendiente') {
+        <div class="escena">
+          <svg
+            class="camion camion--animado"
+            viewBox="0 0 200 100"
+            role="img"
+            aria-label="Camión en preparación"
+          >
+            <rect x="0" y="82" width="200" height="3" fill="var(--color-border)" />
+            <g class="camion__cuerpo">
+              <rect
+                x="20"
+                y="45"
+                width="70"
+                height="30"
+                rx="4"
+                fill="var(--color-cerdo)"
+                stroke="var(--color-primary)"
+                stroke-width="2"
+              />
+              <path
+                d="M92 55 h28 l14 14 v6 h-42 z"
+                fill="var(--color-secondary)"
+                stroke="var(--color-primary)"
+                stroke-width="2"
+              />
+              <circle class="rueda" cx="45" cy="78" r="9" fill="var(--color-primary)" />
+              <circle class="rueda" cx="120" cy="78" r="9" fill="var(--color-primary)" />
+              <circle cx="45" cy="78" r="3" fill="var(--color-bg)" />
+              <circle cx="120" cy="78" r="3" fill="var(--color-bg)" />
+            </g>
+          </svg>
+          <h1>Preparando tu pedido…</h1>
+          <p class="codigo">{{ p.codigo }}</p>
+          <p class="mensaje">Ya recibimos tu pedido y lo estamos alistando.</p>
+        </div>
+      }
+      @case ('enviado') {
+        <div class="escena">
+          <svg class="camion" viewBox="0 0 200 100" role="img" aria-label="Camión en camino">
+            <rect x="0" y="82" width="200" height="3" fill="var(--color-border)" />
+            <g>
+              <rect
+                x="20"
+                y="45"
+                width="70"
+                height="30"
+                rx="4"
+                fill="var(--color-cerdo)"
+                stroke="var(--color-primary)"
+                stroke-width="2"
+              />
+              <path
+                d="M92 55 h28 l14 14 v6 h-42 z"
+                fill="var(--color-secondary)"
+                stroke="var(--color-primary)"
+                stroke-width="2"
+              />
+              <circle cx="45" cy="78" r="9" fill="var(--color-primary)" />
+              <circle cx="120" cy="78" r="9" fill="var(--color-primary)" />
+              <circle cx="45" cy="78" r="3" fill="var(--color-bg)" />
+              <circle cx="120" cy="78" r="3" fill="var(--color-bg)" />
+            </g>
+          </svg>
+          <h1>Tu pedido va en camino</h1>
+          <p class="codigo">{{ p.codigo }}</p>
+
+          @if (!yaLlegoLaHora()) {
+            <p class="mensaje">Llega aprox. a las {{ fechaEstimada() | date: 'shortTime' }}.</p>
+          } @else {
+            <p class="mensaje">Debería haber llegado ya — confírmanos cuando lo recibas.</p>
+            <app-button size="lg" [loading]="marcando()" (click)="marcarRecibido()"
+              >Marcar pedido como recibido</app-button
+            >
+          }
+        </div>
+      }
+      @case ('recibido') {
+        <div class="escena">
+          <svg class="carita" viewBox="0 0 100 100" role="img" aria-label="Carita feliz">
+            <circle
+              cx="50"
+              cy="50"
+              r="42"
+              fill="var(--color-success-tint)"
+              stroke="var(--color-success)"
+              stroke-width="3"
+            />
+            <circle cx="35" cy="42" r="4" fill="var(--color-success)" />
+            <circle cx="65" cy="42" r="4" fill="var(--color-success)" />
+            <path
+              d="M30 58 Q50 78 70 58"
+              fill="none"
+              stroke="var(--color-success)"
+              stroke-width="4"
+              stroke-linecap="round"
+            />
+          </svg>
+          <h1>¡Gracias por su preferencia!</h1>
+          <p class="codigo">{{ p.codigo }}</p>
+        </div>
+      }
+      @case ('cancelado') {
+        <div class="escena">
+          <h1>Pedido cancelado</h1>
+          <p class="codigo">{{ p.codigo }}</p>
+          <p class="mensaje">Si tienes dudas, escríbenos por WhatsApp.</p>
+        </div>
+      }
+    }
+  </section>
+}

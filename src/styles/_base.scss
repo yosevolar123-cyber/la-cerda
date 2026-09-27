@@ -1,0 +1,207 @@
+// =============================================================================
+// La Cerda — base reset & element defaults
+// =============================================================================
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-cerdo);
+  color: var(--color-primary-darker);
+}
+
+// --- Escala tipográfica única ----------------------------------------------------
+// H1 30-40px · H2 24-30px · H3 17-19px · cuerpo 16px · caption 12-14px.
+// El titular tipo landing se reserva para `.hero-titulo` (portada pública).
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--space-3);
+  color: var(--color-primary);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--fs-2xl);
+}
+h2 {
+  font-size: var(--fs-xl);
+}
+h3 {
+  font-size: var(--fs-md);
+  letter-spacing: -0.005em;
+  line-height: var(--lh-snug);
+}
+h4 {
+  font-size: var(--fs-base);
+  letter-spacing: 0;
+  line-height: var(--lh-snug);
+}
+
+.hero-titulo {
+  font-size: var(--fs-3xl);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  color: var(--color-primary);
+}
+
+p {
+  margin: 0 0 var(--space-4);
+  max-width: 65ch;
+  text-wrap: pretty;
+}
+
+small,
+.texto-meta {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+// --- Enlaces: subrayado que crece desde la izquierda ----------------------------
+a {
+  color: var(--color-secondary);
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1.5px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition:
+    background-size var(--duration-base) var(--ease-out),
+    color var(--duration-fast) var(--ease-standard);
+
+  &:hover {
+    background-size: 100% 1.5px;
+  }
+}
+
+// Enlaces que son "bloques" (tarjetas, botones, logo) no llevan subrayado.
+a.btn,
+a.bloque,
+a:has(> app-card),
+a:has(img) {
+  background-image: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// --- Contenedor de página compartido ---------------------------------------------
+// Un solo ancho y un solo margen lateral para todas las pantallas; cada página
+// solo elige su variante de ancho.
+.pagina {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding: var(--space-6) var(--page-gutter) var(--space-8);
+}
+.pagina--angosta {
+  max-width: 44rem;
+}
+.pagina--media {
+  max-width: 64rem;
+}
+
+// Superficie simple para formularios y bloques que no necesitan <app-card>.
+.panel {
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  animation: aparecer var(--duration-slow) var(--ease-out) both;
+}
+
+// Estado vacío compartido: título + una línea que dice qué hacer.
+.vacio {
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+  color: var(--color-text-muted);
+
+  p {
+    margin-inline: auto;
+  }
+}
+
+.vacio__titulo {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  color: var(--color-primary);
+  margin-bottom: var(--space-2);
+}
+
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Visible keyboard focus everywhere — never suppressed.
+:focus-visible {
+  outline: 2.5px solid var(--color-secondary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

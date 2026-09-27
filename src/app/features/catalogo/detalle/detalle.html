@@ -1,0 +1,114 @@
+@if (cargando()) {
+  <section class="pagina detalle">
+    <div class="detalle__grid">
+      <div class="skeleton" style="aspect-ratio: 1"></div>
+      <div>
+        <div class="skeleton" style="height: 3rem; margin-bottom: 1rem"></div>
+        <div class="skeleton" style="height: 8rem"></div>
+      </div>
+    </div>
+  </section>
+} @else if (noEncontrado()) {
+  <section class="pagina">
+    <div class="vacio aparecer">
+      <p class="vacio__titulo">No encontramos este producto</p>
+      <p>Puede que ya no esté disponible.</p>
+      <a routerLink=".." class="btn btn--primary btn--md">Volver al catálogo</a>
+    </div>
+  </section>
+} @else if (producto(); as p) {
+  <section class="pagina detalle">
+    <a routerLink=".." class="detalle__volver">
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+      Catálogo
+    </a>
+
+    <div class="detalle__grid">
+      <div class="detalle__galeria">
+        @if (p.imagen) {
+          <img [src]="p.imagen" [alt]="p.nombre" class="entrada-imagen" width="560" height="560" />
+        }
+        @if (p.precio_base === null) {
+          <app-badge tone="warning" [stamp]="true">Precio a confirmar</app-badge>
+        }
+      </div>
+
+      <div class="detalle__info aparecer" [style.--i]="1">
+        <h1>{{ p.nombre }}</h1>
+
+        @if (p.precio_base !== null) {
+          <p class="detalle__precio"><small>Bs</small> {{ p.precio_base.toFixed(2) }}</p>
+        }
+
+        @if (p.descripcion) {
+          <p class="detalle__descripcion">{{ p.descripcion }}</p>
+        }
+
+        @if (presentaciones().length) {
+          <div class="detalle__presentaciones">
+            <h2>Presentación</h2>
+            <ul>
+              @for (pres of presentaciones(); track pres.id) {
+                <li>{{ pres.formato }}{{ pres.peso ? ' · ' + pres.peso + ' kg' : '' }}</li>
+              }
+            </ul>
+          </div>
+        }
+
+        <div class="detalle__compra">
+          <div class="paso" role="group" aria-label="Cantidad">
+            <button
+              type="button"
+              (click)="cambiarCantidad(-1)"
+              aria-label="Restar uno"
+              [disabled]="cantidad() <= 1"
+            >
+              <app-icon name="minus" [size]="16" />
+            </button>
+            <span aria-live="polite">{{ cantidad() }}</span>
+            <button type="button" (click)="cambiarCantidad(1)" aria-label="Sumar uno">
+              <app-icon name="plus" [size]="16" />
+            </button>
+          </div>
+          <app-button size="lg" (click)="agregarAlCarrito()">
+            <app-icon name="bag" [size]="18" />
+            Agregar
+            @if (p.precio_base !== null) {
+              · Bs {{ (p.precio_base * cantidad()).toFixed(2) }}
+            }
+          </app-button>
+        </div>
+
+        @if (resenas().length) {
+          <div class="detalle__resenas">
+            <h2>Opiniones de clientes</h2>
+            @for (r of resenas(); track r.id) {
+              <div class="resena">
+                @if (r.calificacion) {
+                  <span class="resena__estrellas" [attr.aria-label]="r.calificacion + ' de 5'"
+                    >{{ '★'.repeat(r.calificacion) }}{{ '☆'.repeat(5 - r.calificacion) }}</span
+                  >
+                }
+                @if (r.comentario) {
+                  <p>{{ r.comentario }}</p>
+                }
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+}

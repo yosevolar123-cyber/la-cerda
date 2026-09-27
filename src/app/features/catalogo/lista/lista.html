@@ -1,0 +1,120 @@
+<section class="catalogo pagina" [class.catalogo--compacto]="!mostrarHero()">
+  @if (mostrarHero()) {
+    <div class="hero">
+      <div class="hero__texto">
+        <h1 class="hero-titulo">El sabor de siempre, a un pedido de distancia</h1>
+        <p class="hero__bajada">
+          Embutidos y pollo Sofía, frescos y listos para entregar en Cochabamba.
+        </p>
+        <p class="hero__nota">
+          <app-icon name="truck" [size]="18" />
+          Pides aquí y coordinamos la entrega por WhatsApp.
+        </p>
+      </div>
+      <div class="hero__mascota" aria-hidden="true">
+        <span class="hero__halo"></span>
+        <img src="brand/logo-mark.png" alt="" width="260" height="260" />
+      </div>
+    </div>
+  }
+
+  <div class="herramientas">
+    <label class="buscador">
+      <app-icon name="search" [size]="18" />
+      <span class="visualmente-oculto">Buscar producto</span>
+      <input
+        type="search"
+        placeholder="Buscar mortadela, chorizo, milanesa…"
+        [value]="busqueda()"
+        (input)="busqueda.set($any($event.target).value)"
+      />
+    </label>
+
+    <div class="fila-chips" role="toolbar" aria-label="Categorías">
+      <button
+        class="chip"
+        [class.chip--activa]="categoriaActiva() === null"
+        type="button"
+        (click)="seleccionarCategoria(null)"
+      >
+        Todo
+      </button>
+      @for (cat of categorias(); track cat.id) {
+        <button
+          class="chip"
+          [class.chip--activa]="categoriaActiva() === cat.id"
+          type="button"
+          (click)="seleccionarCategoria(cat.id)"
+        >
+          @if (imagenPorCategoria()[cat.id]; as img) {
+            <img [src]="img" alt="" width="24" height="24" />
+          }
+          {{ cat.nombre }}
+        </button>
+      }
+    </div>
+  </div>
+
+  @if (cargando()) {
+    <div class="grilla">
+      @for (i of [1, 2, 3, 4, 5, 6, 7, 8]; track i) {
+        <div class="skeleton tarjeta-skeleton"></div>
+      }
+    </div>
+  } @else if (productosFiltrados().length === 0) {
+    <div class="vacio aparecer">
+      <p class="vacio__titulo">No encontramos productos</p>
+      <p>Prueba con otra palabra o elige “Todo” en las categorías.</p>
+    </div>
+  } @else {
+    <p class="conteo">{{ productosFiltrados().length }} productos</p>
+    <div class="grilla">
+      @for (p of productosFiltrados(); track p.id; let i = $index) {
+        <a [routerLink]="[p.id]" class="producto-link aparecer" [style.--i]="i">
+          <app-card [interactive]="true">
+            <article class="producto">
+              <div class="producto__marco">
+                @if (p.imagen) {
+                  <img
+                    [src]="p.imagen"
+                    [alt]="p.nombre"
+                    class="producto__imagen entrada-imagen"
+                    width="320"
+                    height="320"
+                    loading="lazy"
+                  />
+                }
+                @if (p.precio_base === null) {
+                  <app-badge tone="warning" [stamp]="true" class="producto__badge"
+                    >Precio a confirmar</app-badge
+                  >
+                }
+              </div>
+              <h3 class="producto__nombre">{{ p.nombre }}</h3>
+              <div class="producto__pie">
+                @if (p.precio_base !== null) {
+                  <span class="producto__precio"
+                    ><small>Bs</small> {{ p.precio_base.toFixed(2) }}</span
+                  >
+                } @else {
+                  <span class="producto__precio producto__precio--pendiente">Consultar</span>
+                }
+                <app-button
+                  size="sm"
+                  [variant]="agregadoReciente() === p.id ? 'secondary' : 'primary'"
+                  (click)="agregarAlCarrito(p, $event)"
+                >
+                  @if (agregadoReciente() === p.id) {
+                    <app-icon name="check" [size]="16" /> Agregado
+                  } @else {
+                    <app-icon name="plus" [size]="16" /> Agregar
+                  }
+                </app-button>
+              </div>
+            </article>
+          </app-card>
+        </a>
+      }
+    </div>
+  }
+</section>

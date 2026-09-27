@@ -1,0 +1,23 @@
+<section class="pagina pagina--angosta">
+  <app-page-header
+    titulo="Reporte PDF"
+    subtitulo="Elige un rango de fechas: el PDF incluye ventas, stock y ranking de productos del periodo."
+  />
+
+  <form
+    [formGroup]="form"
+    (ngSubmit)="generarReporte()"
+    novalidate
+    class="panel admin-reportes__form"
+  >
+    <div class="field">
+      <label class="field__label" for="desde">Desde</label>
+      <input id="desde" class="input" type="date" formControlName="desde" />
+    </div>
+    <div class="field">
+      <label class="field__label" for="hasta">Hasta</label>
+      <input id="hasta" class="input" type="date" formControlName="hasta" />
+    </div>
+    <app-button type="submit" size="lg" [loading]="generando()">Generar PDF</app-button>
+  </form>
+</section>

@@ -1,0 +1,157 @@
+@if (cargando()) {
+  <section class="pagina pagina--media">
+    <div class="skeleton" style="height: 5rem; margin-bottom: 1.5rem"></div>
+    <div class="skeleton" style="height: 18rem"></div>
+  </section>
+} @else if (pedido(); as p) {
+  <section class="pagina pagina--media">
+    <app-page-header
+      [titulo]="p.codigo ?? 'Pedido'"
+      [subtitulo]="
+        (p.fecha | date: 'EEEE d MMMM, HH:mm') +
+        ' · ' +
+        (p.clientes?.nombre ?? 'Venta de mostrador')
+      "
+      volverRuta="/secretaria"
+      volverTexto="Pedidos"
+    >
+      <app-badge [tone]="tonoEstado(p.estado)">{{
+        ESTADO_UI_LABELS[estadoUI(p.estado)]
+      }}</app-badge>
+    </app-page-header>
+
+    <!-- Progreso en 3 pasos -->
+    @if (estadoUI(p.estado) !== 'cancelado') {
+      <ol class="progreso aparecer" aria-label="Progreso del pedido">
+        @for (paso of pasos; track paso; let i = $index) {
+          <li
+            class="progreso__paso"
+            [class.progreso__paso--hecho]="indicePaso(p.estado) >= i"
+            [class.progreso__paso--actual]="indicePaso(p.estado) === i"
+          >
+            <span class="progreso__punto">
+              @if (indicePaso(p.estado) > i) {
+                <app-icon name="check" [size]="14" />
+              } @else {
+                {{ i + 1 }}
+              }
+            </span>
+            <span class="progreso__etiqueta">{{ ESTADO_UI_LABELS[paso] }}</span>
+          </li>
+        }
+      </ol>
+    } @else {
+      <p class="cancelado aparecer">Este pedido está cancelado.</p>
+    }
+
+    <div class="columnas">
+      <div class="columna">
+        <app-card class="aparecer" [style.--i]="1">
+          <h2>Productos</h2>
+          <ul class="items">
+            @for (d of p.detalle_pedido; track d.id) {
+              <li>
+                <span class="items__cantidad">{{ d.cantidad }}×</span>
+                <span class="items__nombre">{{ d.productos?.nombre }}</span>
+                <span class="items__subtotal">Bs {{ d.subtotal?.toFixed(2) }}</span>
+              </li>
+            }
+          </ul>
+          <div class="total">
+            <span>Total</span>
+            <strong>Bs {{ total().toFixed(2) }}</strong>
+          </div>
+        </app-card>
+
+        <app-card class="aparecer" [style.--i]="2">
+          <h2>Entrega</h2>
+          @if (envio(); as e) {
+            <p class="direccion">
+              <app-icon name="map-pin" [size]="18" />
+              {{ e.direccion_entrega }}
+            </p>
+            <form [formGroup]="formEnvio" (ngSubmit)="guardarEnvio()" class="envio-form">
+              <div class="field">
+                <label class="field__label" for="fecha_estimada">Fecha y hora estimada</label>
+                <input
+                  id="fecha_estimada"
+                  class="input"
+                  type="datetime-local"
+                  formControlName="fecha_estimada"
+                />
+              </div>
+              <div class="field">
+                <label class="field__label" for="costo_envio">Costo de envío (Bs)</label>
+                <input
+                  id="costo_envio"
+                  class="input"
+                  type="number"
+                  min="0"
+                  step="0.5"
+                  formControlName="costo_envio"
+                />
+              </div>
+              <app-button type="submit" variant="secondary" [loading]="guardando()"
+                >Guardar entrega</app-button
+              >
+            </form>
+          } @else {
+            <p class="direccion">
+              <app-icon name="bag" [size]="18" />
+              Retiro en el local — no requiere envío.
+            </p>
+          }
+        </app-card>
+      </div>
+
+      <div class="columna">
+        <app-card class="aparecer" [style.--i]="3">
+          <h2>Estado exacto</h2>
+          <p class="field__hint">
+            El listado agrupa estos sub-estados en 3 pasos; aquí puedes ajustar el exacto.
+          </p>
+          <div class="estado-botones">
+            @for (estado of estados; track estado) {
+              <button
+                type="button"
+                class="chip"
+                [class.chip--activa]="p.estado === estado"
+                [disabled]="guardando()"
+                (click)="cambiarEstado(estado)"
+              >
+                {{ ESTADO_RAW_LABELS[estado] }}
+              </button>
+            }
+          </div>
+        </app-card>
+
+        <app-card class="aparecer" [style.--i]="4">
+          <h2>Notificar al cliente</h2>
+          @if (!telefonoCliente()) {
+            <p class="texto-meta">El cliente no tiene un teléfono registrado.</p>
+          } @else {
+            <p class="texto-meta">
+              Envía el estado, la hora estimada y el costo de envío por WhatsApp.
+            </p>
+            <div class="whatsapp">
+              <app-button variant="whatsapp" (click)="generarEnlaceWhatsapp()"
+                >Preparar mensaje</app-button
+              >
+              @if (enlaceWhatsappCliente(); as enlace) {
+                <a
+                  [href]="enlace"
+                  target="_blank"
+                  rel="noopener"
+                  class="btn btn--whatsapp btn--md aparecer"
+                >
+                  Abrir WhatsApp
+                  <app-icon name="arrow-right" [size]="16" />
+                </a>
+              }
+            </div>
+          }
+        </app-card>
+      </div>
+    </div>
+  </section>
+}

@@ -1,0 +1,121 @@
+.contadores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(12rem, 100%), 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+// Cada contador es además un filtro.
+.contador {
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+}
+
+.filtros {
+  margin-bottom: var(--space-4);
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.fila-skeleton {
+  height: 4.5rem;
+}
+
+.pedido {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-xs);
+  color: inherit;
+  transition:
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-standard);
+
+  &:hover {
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-md);
+    transform: translateX(4px);
+
+    .pedido__flecha {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (min-width: 640px) {
+    grid-template-columns: auto 1fr auto auto auto;
+  }
+}
+
+.pedido__icono {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--color-secondary-tint);
+  color: var(--color-secondary);
+}
+
+.pedido__icono--mostrador {
+  background: var(--color-cerdo-tint);
+  color: var(--color-hocico-dark);
+}
+
+.pedido__principal {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pedido__codigo {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.pedido__cliente {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pedido__fecha {
+  display: none;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+
+  @media (min-width: 640px) {
+    display: block;
+  }
+}
+
+.pedido__flecha {
+  display: none;
+  color: var(--color-primary);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition:
+    opacity var(--duration-base) var(--ease-standard),
+    transform var(--duration-base) var(--ease-out);
+
+  @media (min-width: 640px) {
+    display: block;
+  }
+}

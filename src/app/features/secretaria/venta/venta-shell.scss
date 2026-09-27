@@ -1,0 +1,29 @@
+.venta-shell__cabecera {
+  padding-bottom: 0;
+}
+
+.venta-shell__contador {
+  min-width: 1.4rem;
+  height: 1.4rem;
+  padding: 0 0.35rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+  color: #fff;
+  font-size: var(--fs-xs);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: pop 300ms var(--ease-spring);
+}
+
+.venta-shell__total {
+  padding-left: var(--space-2);
+  border-left: 1px solid var(--color-border-strong);
+  font-weight: 600;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0);
+  }
+}

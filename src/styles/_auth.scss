@@ -1,0 +1,88 @@
+// Pantallas de login y registro (compartido — antes duplicado en 2 componentes).
+.auth-screen {
+  min-height: calc(100dvh - 10rem);
+  display: grid;
+  place-items: center;
+  padding: var(--space-6) var(--page-gutter) var(--space-8);
+}
+
+.auth-screen__contenido {
+  width: 100%;
+  max-width: 26rem;
+}
+
+.auth-screen__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: var(--space-6);
+  animation: aparecer var(--duration-slow) var(--ease-out) both;
+
+  img {
+    width: 5.5rem;
+    height: 5.5rem;
+    margin-bottom: var(--space-4);
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: var(--shadow-md);
+    animation: flotar 6s ease-in-out infinite;
+  }
+
+  h1 {
+    margin-bottom: var(--space-1);
+  }
+
+  p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+}
+
+@keyframes flotar {
+  50% {
+    transform: translateY(-6px) rotate(-3deg);
+  }
+}
+
+.auth-screen__card {
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  background: rgb(255 255 255 / 82%);
+  border: 1px solid rgb(255 255 255 / 60%);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  animation: aparecer var(--duration-slow) var(--ease-out) 90ms both;
+
+  h2 {
+    font-size: var(--fs-xl);
+    margin-bottom: var(--space-5);
+  }
+
+  app-button {
+    display: block;
+    margin-top: var(--space-2);
+
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+.auth-screen__switch {
+  margin: var(--space-5) 0 0;
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  max-width: none;
+}
+
+.auth-screen__success {
+  text-align: center;
+
+  p {
+    margin-inline: auto;
+    color: var(--color-text-muted);
+  }
+}

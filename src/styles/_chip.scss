@@ -1,0 +1,77 @@
+// Chip/pill reutilizable — categorías, filtros de estado, modalidad.
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+  padding: 0.45rem var(--space-4);
+  border-radius: var(--radius-pill);
+  border: var(--border-w) solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  box-shadow: var(--shadow-xs);
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    border-color var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-spring);
+
+  &:hover:not(:disabled) {
+    border-color: var(--color-border-strong);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+
+  &:focus-visible {
+    outline: 2.5px solid var(--color-secondary);
+    outline-offset: 2px;
+  }
+}
+
+.chip--activa {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-text-on-primary);
+  box-shadow: 0 4px 12px rgb(83 33 94 / 22%);
+
+  &:hover:not(:disabled) {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-primary);
+  }
+}
+
+.chip--secundaria {
+  margin-left: auto;
+  color: var(--color-text-muted);
+  border-style: dashed;
+  box-shadow: none;
+}
+
+// Fila de chips con scroll horizontal y fundido en los bordes en móvil.
+.fila-chips {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  padding: var(--space-1) var(--space-1) var(--space-3);
+  margin-inline: calc(var(--space-1) * -1);
+  scrollbar-width: none;
+  mask-image: linear-gradient(90deg, transparent, #000 12px, #000 calc(100% - 24px), transparent);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

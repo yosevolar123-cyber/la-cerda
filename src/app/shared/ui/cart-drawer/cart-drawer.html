@@ -1,0 +1,88 @@
+@if (cart.abierto()) {
+  <div class="drawer-fondo" (click)="cart.cerrar()"></div>
+
+  <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-titulo">
+    <header class="drawer__cabecera">
+      <div>
+        <h2 id="drawer-titulo">Carrito</h2>
+        @if (cart.cantidadTotal() > 0) {
+          <p class="drawer__resumen">
+            {{ cart.cantidadTotal() }} {{ cart.cantidadTotal() === 1 ? 'producto' : 'productos' }}
+          </p>
+        }
+      </div>
+      <button class="btn-icono" type="button" (click)="cart.cerrar()" aria-label="Cerrar carrito">
+        <app-icon name="x" [size]="20" />
+      </button>
+    </header>
+
+    @if (cart.items().length === 0) {
+      <div class="drawer__vacio aparecer">
+        <span class="drawer__vacio-icono"><app-icon name="bag" [size]="28" /></span>
+        <p class="drawer__vacio-titulo">El carrito está vacío</p>
+        <p>Agrega productos desde el catálogo con el botón “Agregar”.</p>
+      </div>
+    } @else {
+      <ul class="drawer__lista">
+        @for (item of cart.items(); track item.productoId; let i = $index) {
+          <li class="drawer__item aparecer" [style.--i]="i">
+            <div class="drawer__miniatura">
+              @if (item.imagen) {
+                <img [src]="item.imagen" [alt]="item.nombre" width="64" height="64" />
+              } @else {
+                <app-icon name="package" [size]="20" />
+              }
+            </div>
+
+            <div class="drawer__info">
+              <p class="drawer__nombre">{{ item.nombre }}</p>
+              <p class="drawer__unitario">Bs {{ item.precio.toFixed(2) }} c/u</p>
+
+              <div class="drawer__controles">
+                <div class="paso" role="group" [attr.aria-label]="'Cantidad de ' + item.nombre">
+                  <button
+                    type="button"
+                    (click)="cart.actualizarCantidad(item.productoId, item.cantidad - 1)"
+                    aria-label="Restar uno"
+                  >
+                    <app-icon name="minus" [size]="14" />
+                  </button>
+                  <span aria-live="polite">{{ item.cantidad }}</span>
+                  <button
+                    type="button"
+                    (click)="cart.actualizarCantidad(item.productoId, item.cantidad + 1)"
+                    aria-label="Sumar uno"
+                  >
+                    <app-icon name="plus" [size]="14" />
+                  </button>
+                </div>
+                <button
+                  class="drawer__quitar"
+                  type="button"
+                  (click)="cart.quitar(item.productoId)"
+                  [attr.aria-label]="'Quitar ' + item.nombre"
+                >
+                  <app-icon name="trash" [size]="16" />
+                </button>
+              </div>
+            </div>
+
+            <p class="drawer__subtotal">Bs {{ (item.precio * item.cantidad).toFixed(2) }}</p>
+          </li>
+        }
+      </ul>
+
+      <footer class="drawer__pie">
+        <div class="drawer__total">
+          <span>Total</span>
+          <strong>Bs {{ cart.total().toFixed(2) }}</strong>
+        </div>
+        <app-button size="lg" (click)="irACheckout()">
+          {{ textoBoton() }}
+          <app-icon name="arrow-right" [size]="18" />
+        </app-button>
+        <button type="button" class="drawer__vaciar" (click)="cart.vaciar()">Vaciar carrito</button>
+      </footer>
+    }
+  </aside>
+}

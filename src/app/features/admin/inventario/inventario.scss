@@ -1,0 +1,27 @@
+.admin-inventario {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.entrada-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: var(--space-4);
+  align-items: end;
+}
+
+.crear-almacen {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  border-top: var(--border-w) solid var(--color-border);
+  padding-top: var(--space-4);
+}
+
+.estado-carga {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: var(--space-6) 0;
+}

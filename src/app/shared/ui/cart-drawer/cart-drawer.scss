@@ -1,0 +1,261 @@
+.drawer-fondo {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: rgb(34 23 36 / 38%);
+  backdrop-filter: blur(3px);
+  animation: fundido 220ms var(--ease-standard);
+}
+
+.drawer {
+  position: fixed;
+  top: var(--space-2);
+  right: var(--space-2);
+  bottom: var(--space-2);
+  z-index: 31;
+  width: min(26rem, calc(100vw - var(--space-4)));
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  animation: entrar-derecha 380ms var(--ease-out);
+}
+
+@keyframes fundido {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes entrar-derecha {
+  from {
+    transform: translateX(calc(100% + var(--space-4)));
+  }
+}
+
+.drawer__cabecera {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--space-5) var(--space-5) var(--space-4);
+
+  h2 {
+    margin: 0;
+    font-size: var(--fs-lg);
+  }
+}
+
+.drawer__resumen {
+  margin: var(--space-1) 0 0;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+// --- Vacío ----------------------------------------------------------------------------------
+.drawer__vacio {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-6);
+  color: var(--color-text-muted);
+
+  p {
+    margin: 0 0 var(--space-2);
+  }
+}
+
+.drawer__vacio-icono {
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: var(--space-4);
+  border-radius: 50%;
+  background: var(--color-primary-tint);
+  color: var(--color-primary);
+}
+
+.drawer__vacio-titulo {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  color: var(--color-text);
+}
+
+// --- Lista ----------------------------------------------------------------------------------
+.drawer__lista {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 var(--space-5);
+}
+
+.drawer__item {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+
+  & + & {
+    border-top: 1px solid var(--color-border);
+  }
+}
+
+.drawer__miniatura {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-surface-sunken);
+  display: grid;
+  place-items: center;
+  color: var(--color-text-muted);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.drawer__info {
+  min-width: 0;
+}
+
+.drawer__nombre {
+  margin: 0;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: var(--lh-snug);
+}
+
+.drawer__unitario {
+  margin: var(--space-1) 0 var(--space-3);
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+
+.drawer__controles {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+// Selector de cantidad compacto
+.paso {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+
+  button {
+    display: grid;
+    place-items: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--color-primary);
+    cursor: pointer;
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      transform var(--duration-base) var(--ease-spring);
+
+    &:hover {
+      background: var(--color-primary-tint);
+    }
+
+    &:active {
+      transform: scale(0.85);
+    }
+  }
+
+  span {
+    min-width: 1.75rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.drawer__quitar {
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text-subtle);
+  cursor: pointer;
+  transition:
+    color var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard);
+
+  &:hover {
+    color: var(--color-danger);
+    background: var(--color-danger-tint);
+  }
+}
+
+.drawer__subtotal {
+  margin: 0;
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+// --- Pie --------------------------------------------------------------------------------------
+.drawer__pie {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5) var(--space-5);
+  background: var(--color-surface-sunken);
+  border-top: 1px solid var(--color-border);
+
+  app-button {
+    display: block;
+
+    ::ng-deep .btn {
+      width: 100%;
+    }
+  }
+}
+
+.drawer__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-weight: 500;
+
+  strong {
+    font-family: var(--font-display);
+    font-size: var(--fs-xl);
+    font-weight: 600;
+    color: var(--color-primary);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.drawer__vaciar {
+  align-self: center;
+  border: none;
+  background: none;
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-standard);
+
+  &:hover {
+    color: var(--color-danger);
+  }
+}

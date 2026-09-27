@@ -1,0 +1,96 @@
+// =============================================================================
+// La Cerda — native form control styling
+// Plain classes so Reactive Forms directives stay directly on the native
+// elements, with no wrapper getting in the way of ControlValueAccessor.
+// =============================================================================
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.field__label {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.field__hint {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+
+.field__error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--fs-xs);
+  color: var(--color-danger);
+  font-weight: 500;
+  animation: aparecer var(--duration-base) var(--ease-out) both;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 0.75rem var(--space-4);
+  border: var(--border-w) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: var(--fs-base);
+  box-shadow: var(--shadow-xs);
+  transition:
+    border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-standard);
+
+  &::placeholder {
+    color: var(--color-text-subtle);
+  }
+
+  &:hover:not(:disabled) {
+    border-color: var(--color-border-strong);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 4px rgb(127 72 155 / 14%);
+  }
+
+  &.ng-invalid.ng-touched {
+    border-color: var(--color-danger);
+
+    &:focus-visible {
+      box-shadow: 0 0 0 4px rgb(179 73 92 / 14%);
+    }
+  }
+
+  &.ng-valid.ng-touched.ng-dirty {
+    border-color: var(--color-success);
+  }
+
+  &:disabled {
+    background: var(--color-surface-sunken);
+    color: var(--color-text-muted);
+    cursor: not-allowed;
+  }
+}
+
+.select {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2353215e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  cursor: pointer;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 6rem;
+}

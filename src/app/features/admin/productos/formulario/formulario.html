@@ -1,0 +1,156 @@
+<section class="pagina pagina--angosta form-producto">
+  <app-page-header
+    [titulo]="productoId() ? 'Editar producto' : 'Nuevo producto'"
+    subtitulo="Los cambios se ven en el catálogo apenas guardas."
+    volverRuta="/admin/productos"
+    volverTexto="Productos"
+  />
+
+  @if (cargando()) {
+    <div class="skeleton" style="height: 30rem"></div>
+  } @else {
+    <form class="panel" [formGroup]="form" (ngSubmit)="guardar()" novalidate>
+      <div class="form-producto__imagen">
+        @if (imagenPreview()) {
+          <img [src]="imagenPreview()" alt="" width="140" height="140" />
+        } @else {
+          <div class="form-producto__imagen-vacia">Sin imagen</div>
+        }
+        <label class="subir-imagen">
+          Subir imagen (máx. 15 MB)
+          <input
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif,image/avif"
+            (change)="seleccionarArchivo($event)"
+            hidden
+          />
+        </label>
+        @if (errorImagen()) {
+          <span class="field__error">{{ errorImagen() }}</span>
+        }
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="nombre">Nombre</label>
+        <input id="nombre" class="input" type="text" formControlName="nombre" />
+        <app-field-error [control]="nombre" />
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="descripcion">Descripción</label>
+        <textarea id="descripcion" class="textarea" formControlName="descripcion"></textarea>
+      </div>
+
+      <div class="form-producto__fila">
+        <div class="field">
+          <label class="field__label" for="sku">SKU</label>
+          <input id="sku" class="input" type="text" formControlName="sku" />
+          <app-field-error [control]="sku" />
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="categoria_id">Categoría</label>
+          <select id="categoria_id" class="select" formControlName="categoria_id">
+            <option value="" disabled>Selecciona una categoría</option>
+            @for (c of categorias(); track c.id) {
+              <option [value]="c.id">{{ c.nombre }}</option>
+            }
+          </select>
+          <app-field-error [control]="categoria_id" />
+        </div>
+      </div>
+
+      <div class="form-producto__fila">
+        <div class="field">
+          <label class="field__label" for="unidad_medida">Unidad de medida</label>
+          <select id="unidad_medida" class="select" formControlName="unidad_medida">
+            <option value="paquete">Paquete</option>
+            <option value="kg">Kg</option>
+            <option value="unidad">Unidad</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field__label" for="estado">Estado</label>
+          <select id="estado" class="select" formControlName="estado">
+            <option [ngValue]="true">Activo</option>
+            <option [ngValue]="false">Inactivo</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-producto__fila form-producto__fila--3">
+        <div class="field">
+          <label class="field__label" for="precio_base">Precio minorista (Bs)</label>
+          <input
+            id="precio_base"
+            class="input"
+            type="number"
+            min="0"
+            step="0.5"
+            formControlName="precio_base"
+          />
+        </div>
+        <div class="field">
+          <label class="field__label" for="precio_mayorista">Precio mayorista (Bs)</label>
+          <input
+            id="precio_mayorista"
+            class="input"
+            type="number"
+            min="0"
+            step="0.5"
+            formControlName="precio_mayorista"
+          />
+        </div>
+        <div class="field">
+          <label class="field__label" for="margen">Margen</label>
+          <input
+            id="margen"
+            class="input"
+            type="number"
+            min="0"
+            step="0.01"
+            formControlName="margen"
+          />
+        </div>
+      </div>
+
+      <app-button type="submit" size="lg" [loading]="guardando()">Guardar producto</app-button>
+    </form>
+
+    @if (productoId()) {
+      <div class="presentaciones">
+        <h2>Presentaciones</h2>
+        <ul>
+          @for (p of presentaciones(); track p.id) {
+            <li>
+              {{ p.formato }}{{ p.peso ? ' — ' + p.peso + ' kg' : '' }}
+              <button type="button" (click)="eliminarPresentacion(p.id)">Quitar</button>
+            </li>
+          }
+        </ul>
+        <div class="presentaciones__nueva">
+          <input
+            class="input"
+            type="text"
+            placeholder="Formato (ej. Barra 500 g)"
+            [value]="nuevaPresentacionFormato()"
+            (input)="nuevaPresentacionFormato.set($any($event.target).value)"
+          />
+          <input
+            class="input"
+            type="number"
+            placeholder="Peso (kg, opcional)"
+            step="0.01"
+            [value]="nuevaPresentacionPeso()"
+            (input)="
+              nuevaPresentacionPeso.set(
+                $any($event.target).value ? +$any($event.target).value : null
+              )
+            "
+          />
+          <app-button size="sm" (click)="agregarPresentacion()">Agregar</app-button>
+        </div>
+      </div>
+    }
+  }
+</section>

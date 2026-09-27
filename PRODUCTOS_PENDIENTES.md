@@ -1,0 +1,54 @@
+# Pendientes de revisión — ingesta de catálogo
+
+Generado automáticamente por scripts/seed-productos.ts el 2026-09-26T09:07:52.372Z.
+
+- **EMB-533329** (Chorizo Churrasquero al vacío 1 kg): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-533348** (Chorizo Churrasquero al vacío 5 unidades): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-533328** (Chorizo Parrillero al vacío 1 kg): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-533330** (Chorizo de Res al vacío 1 kg): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-531807** (Jamón Ahumado de Cerdo al vacío 250 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-531506** (Jamón Inglés en barra): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-531805** (Jamón Sandwichero al vacío 250 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-534506** (Mini Salchicha Frankfurt al vacío 10 unidades): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-534507** (Mini Salchicha Frankfurt al vacío 20 unidades): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-534504** (Mini Salchicha de Pollo al vacío 10 unidades): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-534505** (Mini Salchicha de Pollo al vacío 20 unidades): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-534508** (Mini Salchicha de Res al vacío 10 unidades): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-530305** (Mortadela Jamonada al vacío 200 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-530005** (Mortadela Jamonada en barra 500 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-530306** (Mortadela Primavera al vacío 200 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-530033** (Mortadela Primavera en barra 500 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-530004** (Mortadela de Gallina en barra 500 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-535801** (Paté de Hígado de Cerdo 100 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-535805** (Paté de Hígado de Cerdo 240 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-535700** (Paté de Hígado de Pollo 100 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-535702** (Paté de Hígado de Pollo 240 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-534518** (Salchicha Cocktelera al vacío 250 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-534511** (Salchicha Frankfurt Extra Larga al vacío 12 unidades): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-534510** (Salchicha Frankfurt de 14 cm al vacío 10 unidades): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **EMB-534513** (Salchicha Viena al vacío 350 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-510000** (Alas de Pollo en bandeja): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-504803** (Carne Molida de Pollo 400 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-541522** (Chicharrón de Pollo 1 kg): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-501642** (Cuarto de Pollo Pechuga congelada 340 g aprox.): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-501643** (Cuarto de Pollo Pierna congelada 340 g aprox.): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-510001** (Filetes de Pollo en bandeja): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-54030** (Hamburguesa Pollo Clásica - 2 unidades): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-540305** (Hamburguesa Pollo Express - 3 unidades): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-541510** (Milanesa Americana de Pollo 500 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-541517** (Milanesa Americana de Pollo sachet 250 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-541516** (Milanesa Cordon Bleu 600 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-541605** (Milanesa Express de Pollo - caja de 6 unidades): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-541504** (Milanesa de Pollo 500 g - 4 unidades): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-541506** (Muslo Relleno): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-510002** (Muslos de Pollo en bandeja): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-542004** (Nuggets Dino 500 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-542002** (Nuggets Patitas 350 g - 12 unidades): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-542014** (Nuggets Patitas Súper Crocante 350 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-510003** (Pechuga de Pollo con piel en bandeja): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-510004** (Piernas de Pollo en bandeja): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-501006** (Pollo Entero Sofía Mediano 2 kg aprox.): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-541505** (Pollo Relleno Tradicional): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-541519** (Pollo Relleno con Arroz a la Valenciana): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-541539** (Silpancho de Pollo 700 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.
+- **PRO-541533** (Tenders de Pollo 500 g): precio_mayorista y margen no vienen en las fichas — completar en el panel de admin.

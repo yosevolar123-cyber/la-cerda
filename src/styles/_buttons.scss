@@ -1,0 +1,181 @@
+// Botones — reglas globales: aplican igual a <app-button> y a cualquier
+// <a>/<button> con clases .btn puestas a mano (la encapsulación de Angular
+// impedía que llegaran a esos casos cuando vivían en el componente).
+@use 'mixins';
+
+.btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  line-height: 1.2;
+  border-radius: var(--radius-pill);
+  border: var(--border-w) solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-spring),
+    opacity var(--duration-fast) var(--ease-standard);
+
+  // Brillo que cruza el botón al pasar el cursor (solo variantes sólidas).
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      110deg,
+      transparent 35%,
+      rgb(255 255 255 / 22%) 50%,
+      transparent 65%
+    );
+    transform: translateX(-120%);
+    transition: transform 600ms var(--ease-out);
+    pointer-events: none;
+  }
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0) scale(0.96);
+    transition-duration: 80ms;
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  @include mixins.focus-ring;
+}
+
+.btn--sm {
+  padding: 0.45rem var(--space-4);
+  font-size: var(--fs-sm);
+}
+.btn--md {
+  padding: 0.7rem var(--space-5);
+  font-size: var(--fs-base);
+}
+.btn--lg {
+  padding: 0.9rem var(--space-6);
+  font-size: var(--fs-base);
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-text-on-primary);
+  box-shadow: 0 2px 6px rgb(83 33 94 / 18%);
+
+  &:hover:not(:disabled) {
+    background: var(--color-primary-dark);
+    box-shadow: var(--shadow-primary);
+
+    &::after {
+      transform: translateX(120%);
+    }
+  }
+}
+
+.btn--secondary {
+  background: var(--color-surface);
+  border-color: var(--color-border-strong);
+  color: var(--color-primary);
+
+  &:hover:not(:disabled) {
+    border-color: var(--color-primary);
+    background: var(--color-primary-tint);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-primary);
+
+  &:hover:not(:disabled) {
+    background: var(--color-primary-tint);
+    transform: none;
+  }
+}
+
+.btn--danger {
+  background: var(--color-danger);
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--color-danger) 85%, black);
+    box-shadow: 0 8px 20px rgb(179 73 92 / 28%);
+  }
+}
+
+.btn--whatsapp {
+  background: #1fae55; // más oscuro que el verde oficial para contraste AA con texto blanco
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background: #189448;
+    box-shadow: 0 8px 20px rgb(31 174 85 / 30%);
+
+    &::after {
+      transform: translateX(120%);
+    }
+  }
+}
+
+// Botones de solo ícono (carrito, cerrar, etc.)
+.btn-icono {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: transparent;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-standard),
+    transform var(--duration-base) var(--ease-spring);
+
+  &:hover {
+    background: var(--color-primary-tint);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  @include mixins.focus-ring;
+}
+
+.btn__spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
