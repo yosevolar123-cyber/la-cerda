@@ -66,6 +66,7 @@ export const MENSAJES_ERROR: Record<string, string> = {
   passwordSinMayuscula: 'Debe incluir al menos una mayúscula.',
   passwordSinNumero: 'Debe incluir al menos un número.',
   passwordsNoCoinciden: 'Las contraseñas no coinciden.',
+  min: 'El valor no puede ser menor al mínimo permitido.',
 };
 
 export function primerMensajeError(errores: ValidationErrors | null): string | null {

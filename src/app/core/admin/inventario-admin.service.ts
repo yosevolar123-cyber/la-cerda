@@ -14,7 +14,7 @@ export class InventarioAdminService {
     const { data, error } = await this.supabase
       .from('inventario')
       .select(
-        'id, cantidad_disponible, productos(nombre), almacenes(nombre), lotes_produccion(fecha_vencimiento)',
+        'id, producto_id, almacen_id, cantidad_disponible, productos(nombre), almacenes(nombre), lotes_produccion(fecha_vencimiento)',
       )
       .order('cantidad_disponible', { ascending: true });
     if (error) throw error;
@@ -60,44 +60,25 @@ export class InventarioAdminService {
     return data ?? [];
   }
 
+  /**
+   * Entrada de stock (lote + inventario + movimiento 'entrada') en una sola
+   * transacción vía RPC. Sin almacén usa el primero existente o crea
+   * "Almacén principal".
+   */
   async registrarEntrada(input: {
     productoId: string;
-    almacenId: string;
     cantidad: number;
-    fechaVencimiento: string;
-    usuarioId: string;
+    almacenId?: string;
+    fechaVencimiento?: string;
   }) {
-    const hoy = new Date().toISOString().slice(0, 10);
-    const { data: lote, error: loteError } = await this.supabase
-      .from('lotes_produccion')
-      .insert({
-        producto_id: input.productoId,
-        fecha_produccion: hoy,
-        fecha_vencimiento: input.fechaVencimiento,
-        cantidad_producida: input.cantidad,
-      })
-      .select('id')
-      .single();
-    if (loteError || !lote) throw new Error(loteError?.message ?? 'No se pudo crear el lote');
-
-    const { data: inv, error: invError } = await this.supabase
-      .from('inventario')
-      .insert({
-        producto_id: input.productoId,
-        lote_id: lote.id,
-        almacen_id: input.almacenId,
-        cantidad_disponible: input.cantidad,
-      })
-      .select('id')
-      .single();
-    if (invError || !inv) throw new Error(invError?.message ?? 'No se pudo crear el inventario');
-
-    await this.supabase.from('movimientos_inventario').insert({
-      inventario_id: inv.id,
-      tipo_movimiento: 'entrada',
-      cantidad: input.cantidad,
-      usuario_id: input.usuarioId,
+    const { data, error } = await this.supabase.rpc('agregar_stock', {
+      p_producto_id: input.productoId,
+      p_cantidad: input.cantidad,
+      ...(input.almacenId ? { p_almacen_id: input.almacenId } : {}),
+      ...(input.fechaVencimiento ? { p_fecha_vencimiento: input.fechaVencimiento } : {}),
     });
+    if (error) throw new Error(error.message);
+    return data;
   }
 
   async registrarMovimiento(

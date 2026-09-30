@@ -33,18 +33,18 @@
         <div class="field">
           <label class="field__label" for="almacenId">Almacén</label>
           <select id="almacenId" class="select" formControlName="almacenId">
-            <option value="" disabled>Selecciona un almacén</option>
+            <option value="">Almacén por defecto</option>
             @for (a of almacenes(); track a.id) {
               <option [value]="a.id">{{ a.nombre }}</option>
             }
           </select>
         </div>
         <div class="field">
-          <label class="field__label" for="cantidad">Cantidad</label>
+          <label class="field__label" for="cantidad">¿Cuánto stock vas a agregar?</label>
           <input id="cantidad" class="input" type="number" min="1" formControlName="cantidad" />
         </div>
         <div class="field">
-          <label class="field__label" for="fechaVencimiento">Fecha de vencimiento del lote</label>
+          <label class="field__label" for="fechaVencimiento">Vencimiento del lote (opcional)</label>
           <input
             id="fechaVencimiento"
             class="input"
@@ -106,6 +106,9 @@
               </td>
               <td>
                 <div class="tabla__acciones">
+                  <button type="button" (click)="agregarStock(i.producto_id, i.almacen_id)">
+                    Agregar stock
+                  </button>
                   <button type="button" (click)="registrarSalida(i.id)">Registrar salida</button>
                 </div>
               </td>

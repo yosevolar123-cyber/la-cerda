@@ -1259,6 +1259,15 @@ export type Database = {
     };
     Views: { [_ in never]: never };
     Functions: {
+      agregar_stock: {
+        Args: {
+          p_producto_id: string;
+          p_cantidad: number;
+          p_almacen_id?: string;
+          p_fecha_vencimiento?: string;
+        };
+        Returns: string;
+      };
       auth_cliente_id: { Args: Record<PropertyKey, never>; Returns: string };
       auth_rol: {
         Args: Record<PropertyKey, never>;

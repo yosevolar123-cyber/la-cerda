@@ -114,6 +114,28 @@
         </div>
       </div>
 
+      @if (!productoId()) {
+        <div class="field">
+          <label class="field__label" for="stock_inicial">¿Cuánto stock vas a agregar?</label>
+          <input
+            id="stock_inicial"
+            class="input"
+            type="number"
+            min="0"
+            step="1"
+            [formControl]="stockInicial"
+          />
+          <span class="field__hint">
+            Se registra como entrada en el almacén por defecto. Pon 0 si aún no hay stock.
+          </span>
+          <app-field-error [control]="stockInicial" />
+        </div>
+      }
+
+      @if (errorGeneral()) {
+        <p class="field__error" role="alert">{{ errorGeneral() }}</p>
+      }
+
       <app-button type="submit" size="lg" [loading]="guardando()">Guardar producto</app-button>
     </form>
 

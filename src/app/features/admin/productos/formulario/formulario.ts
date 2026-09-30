@@ -2,6 +2,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductosAdminService } from '../../../../core/admin/productos-admin.service';
+import { InventarioAdminService } from '../../../../core/admin/inventario-admin.service';
 import { Button } from '../../../../shared/ui/button/button';
 import { FieldError } from '../../../../shared/ui/field-error/field-error';
 
@@ -15,6 +16,7 @@ import { PageHeader } from '../../../../shared/ui/page-header/page-header';
 export class FormularioProductoAdmin implements OnInit {
   private fb = inject(FormBuilder);
   private productosSvc = inject(ProductosAdminService);
+  private inventarioSvc = inject(InventarioAdminService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
 
@@ -26,6 +28,7 @@ export class FormularioProductoAdmin implements OnInit {
   errorImagen = signal<string | null>(null);
   guardando = signal(false);
   cargando = signal(true);
+  errorGeneral = signal<string | null>(null);
 
   nuevaPresentacionFormato = signal('');
   nuevaPresentacionPeso = signal<number | null>(null);
@@ -41,6 +44,9 @@ export class FormularioProductoAdmin implements OnInit {
     margen: [null as number | null],
     estado: [true],
   });
+
+  /** Solo se usa al crear: stock inicial que se registra como entrada en inventario. */
+  stockInicial = this.fb.nonNullable.control(100, [Validators.required, Validators.min(0)]);
 
   get nombre() {
     return this.form.controls.nombre;
@@ -91,11 +97,14 @@ export class FormularioProductoAdmin implements OnInit {
   }
 
   async guardar() {
-    if (this.form.invalid) {
+    const esNuevo = !this.productoId();
+    if (this.form.invalid || (esNuevo && this.stockInicial.invalid)) {
       this.form.markAllAsTouched();
+      this.stockInicial.markAsTouched();
       return;
     }
     this.guardando.set(true);
+    this.errorGeneral.set(null);
     const valores = this.form.getRawValue();
 
     try {
@@ -119,8 +128,24 @@ export class FormularioProductoAdmin implements OnInit {
       } else {
         const nuevoId = await this.productosSvc.crear(payload);
         this.productoId.set(nuevoId);
+        const cantidad = this.stockInicial.value;
+        if (cantidad > 0) {
+          try {
+            await this.inventarioSvc.registrarEntrada({ productoId: nuevoId, cantidad });
+          } catch (e) {
+            // El producto ya existe: quedamos en modo edición y avisamos.
+            this.errorGeneral.set(
+              `Producto creado, pero no se pudo registrar el stock (${
+                e instanceof Error ? e.message : 'error desconocido'
+              }). Agrégalo desde Inventario.`,
+            );
+            return;
+          }
+        }
       }
       this.router.navigateByUrl('/admin/productos');
+    } catch (e) {
+      this.errorGeneral.set((e as { message?: string })?.message ?? 'No se pudo guardar el producto.');
     } finally {
       this.guardando.set(false);
     }

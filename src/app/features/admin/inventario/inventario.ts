@@ -8,6 +8,9 @@ import { Card } from '../../../shared/ui/card/card';
 
 import { PageHeader } from '../../../shared/ui/page-header/page-header';
 import { Icon } from '../../../shared/ui/icon/icon';
+
+const STOCK_SUGERIDO = 100;
+
 @Component({
   selector: 'app-admin-inventario',
   imports: [ReactiveFormsModule, Badge, Button, Card, PageHeader, Icon],
@@ -29,9 +32,9 @@ export class InventarioAdmin implements OnInit {
 
   form = this.fb.nonNullable.group({
     productoId: ['', Validators.required],
-    almacenId: ['', Validators.required],
-    cantidad: [0, [Validators.required, Validators.min(1)]],
-    fechaVencimiento: ['', Validators.required],
+    almacenId: [''],
+    cantidad: [STOCK_SUGERIDO, [Validators.required, Validators.min(1)]],
+    fechaVencimiento: [''],
   });
 
   nuevoAlmacenNombre = signal('');
@@ -74,8 +77,6 @@ export class InventarioAdmin implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
-    const usuarioId = this.auth.usuario()?.id;
-    if (!usuarioId) return;
 
     this.guardando.set(true);
     this.error.set(null);
@@ -83,18 +84,39 @@ export class InventarioAdmin implements OnInit {
       const v = this.form.getRawValue();
       await this.inventarioSvc.registrarEntrada({
         productoId: v.productoId,
-        almacenId: v.almacenId,
+        almacenId: v.almacenId || undefined,
         cantidad: v.cantidad,
-        fechaVencimiento: v.fechaVencimiento,
-        usuarioId,
+        fechaVencimiento: v.fechaVencimiento || undefined,
       });
-      this.form.reset({ productoId: '', almacenId: '', cantidad: 0, fechaVencimiento: '' });
+      this.form.reset();
       this.mostrarFormulario.set(false);
       await this.cargar();
     } catch (e) {
       this.error.set(e instanceof Error ? e.message : 'No se pudo registrar la entrada.');
     } finally {
       this.guardando.set(false);
+    }
+  }
+
+  /** Suma stock a un producto ya existente, en el mismo almacén de la fila. */
+  async agregarStock(productoId: string | null, almacenId: string | null) {
+    if (!productoId) return;
+    const respuesta = prompt('¿Cuánto stock vas a agregar?', String(STOCK_SUGERIDO));
+    if (respuesta === null) return;
+    const cantidad = Number(respuesta);
+    if (!Number.isFinite(cantidad) || cantidad <= 0) {
+      alert('Ingresa una cantidad mayor a 0.');
+      return;
+    }
+    try {
+      await this.inventarioSvc.registrarEntrada({
+        productoId,
+        cantidad,
+        almacenId: almacenId ?? undefined,
+      });
+      await this.cargar();
+    } catch (e) {
+      alert(e instanceof Error ? e.message : 'No se pudo agregar el stock.');
     }
   }
 

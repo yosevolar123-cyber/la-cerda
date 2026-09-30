@@ -8,7 +8,7 @@ export type Rol = Enums<'rol_enum'>;
  * no hardcodear esta traducción en componentes individuales.
  */
 export const ROLE_LABELS: Record<Rol, string> = {
-  admin: 'Administrador',
+  admin: 'Admin',
   vendedor: 'Secretaria',
   cliente: 'Cliente',
 };

@@ -7,6 +7,9 @@
   @if (cargando()) {
     <div class="skeleton" style="height: 22rem"></div>
   } @else {
+    @if (error()) {
+      <p class="field__error" role="alert">{{ error() }}</p>
+    }
     <div class="tabla-wrap">
       <table class="tabla">
         <thead>
@@ -25,19 +28,29 @@
               <td>{{ u.email }}</td>
               <td>{{ u.perfiles?.telefono ?? '—' }}</td>
               <td>
-                <select
-                  class="select"
-                  [value]="roles().find((r) => r.nombre === u.roles?.nombre)?.id"
-                  (change)="cambiarRol(u.id, $any($event.target).value)"
-                >
-                  @for (r of roles(); track r.id) {
-                    <option [value]="r.id">{{ ROLE_LABELS[r.nombre] }}</option>
-                  }
-                </select>
+                @if (auth.rol() === 'admin') {
+                  <!-- [selected] por opción: un [value] en el <select> se aplica antes de que
+                       el @for cree las opciones y el navegador cae en la primera (Admin). -->
+                  <select
+                    class="select"
+                    [attr.aria-label]="'Rol de ' + u.email"
+                    [disabled]="guardandoId() === u.id"
+                    (change)="cambiarRol(u.id, $any($event.target).value)"
+                  >
+                    @for (r of roles(); track r.id) {
+                      <option [value]="r.id" [selected]="r.nombre === u.roles?.nombre">
+                        {{ ROLE_LABELS[r.nombre] }}
+                      </option>
+                    }
+                  </select>
+                } @else {
+                  {{ u.roles ? ROLE_LABELS[u.roles.nombre] : '—' }}
+                }
               </td>
               <td>
                 <select
                   class="select"
+                  [disabled]="guardandoId() === u.id"
                   [value]="u.estado"
                   (change)="cambiarEstado(u.id, $any($event.target).value)"
                 >
