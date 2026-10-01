@@ -1268,6 +1268,10 @@ export type Database = {
         };
         Returns: string;
       };
+      ajustar_stock: {
+        Args: { p_producto_id: string; p_nueva_cantidad: number };
+        Returns: number;
+      };
       auth_cliente_id: { Args: Record<PropertyKey, never>; Returns: string };
       auth_rol: {
         Args: Record<PropertyKey, never>;

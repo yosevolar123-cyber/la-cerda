@@ -58,6 +58,6 @@ export class Header {
   async salir() {
     await this.auth.cerrarSesion();
     this.cerrarMenu();
-    this.router.navigateByUrl('/auth/login');
+    this.router.navigateByUrl('/catalogo');
   }
 }

@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormBuilder,
@@ -15,6 +15,7 @@ import {
   normalizarCelular,
   passwordSeguraValidator,
 } from '../../../core/auth/validators';
+import { destinoSeguro, vieneDelCheckout } from '../../../core/auth/redirect';
 import { Button } from '../../../shared/ui/button/button';
 import { FieldError } from '../../../shared/ui/field-error/field-error';
 
@@ -35,6 +36,10 @@ export class Registro {
   private fb = inject(FormBuilder);
   private auth = inject(AuthService);
   private router = inject(Router);
+
+  /** `?redirect=` heredado del login (ej. venía de "Ir a pagar"). */
+  redirect = input<string>();
+  protected readonly vieneDelCheckout = vieneDelCheckout;
 
   enviando = signal(false);
   errorGeneral = signal<string | null>(null);
@@ -75,7 +80,7 @@ export class Registro {
     }
     this.enviando.set(true);
     const valores = this.form.getRawValue();
-    const { error } = await this.auth.registrar({
+    const { data, error } = await this.auth.registrar({
       email: valores.email,
       password: valores.password,
       nombre: valores.nombre,
@@ -92,6 +97,15 @@ export class Registro {
       return;
     }
     this.registrado.set(true);
-    setTimeout(() => this.router.navigateByUrl('/auth/login'), 2500);
+    const destino = destinoSeguro(this.redirect());
+    // Si Supabase ya devolvió sesión (sin confirmación por correo) seguimos
+    // directo a donde iba; si no, al login conservando el destino.
+    setTimeout(() => {
+      if (data.session && destino) this.router.navigateByUrl(destino);
+      else
+        this.router.navigate(['/auth/login'], {
+          queryParams: destino ? { redirect: destino } : {},
+        });
+    }, 2500);
   }
 }

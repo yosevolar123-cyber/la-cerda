@@ -103,13 +103,19 @@ export class AuthService {
 
   /** Alta de un cliente (autoservicio). Roles staff se crean por SQL/admin, no aquí. */
   async registrar(datos: RegistroDatos) {
-    return this.supabase.auth.signUp({
+    const resultado = await this.supabase.auth.signUp({
       email: datos.email,
       password: datos.password,
       options: {
         data: { nombre: datos.nombre, telefono: datos.telefono },
       },
     });
+    // Sin confirmación por correo el alta ya trae sesión: cargamos rol/cliente
+    // antes de que el registro navegue a una ruta protegida (ej. checkout).
+    if (resultado.data.session) {
+      await this.cargarRolYCliente(resultado.data.session);
+    }
+    return resultado;
   }
 
   async iniciarSesion(email: string, password: string) {

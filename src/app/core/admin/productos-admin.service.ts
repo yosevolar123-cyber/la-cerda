@@ -9,13 +9,30 @@ const TAMANO_MAXIMO = 15 * 1024 * 1024;
 export class ProductosAdminService {
   private supabase = inject(SupabaseService).client;
 
+  /** Productos con su stock total (suma de `inventario` en todos los almacenes/lotes). */
   async listar() {
     const { data, error } = await this.supabase
       .from('productos')
-      .select('*, categorias_producto(nombre)')
+      .select('*, categorias_producto(nombre), inventario(cantidad_disponible)')
       .order('nombre');
     if (error) throw error;
-    return data ?? [];
+    return (data ?? []).map(({ inventario, ...p }) => ({
+      ...p,
+      stock: inventario.reduce((suma, i) => suma + (i.cantidad_disponible ?? 0), 0),
+    }));
+  }
+
+  /**
+   * Fija el stock total del producto. La RPC registra la diferencia como
+   * movimiento 'entrada' o 'salida' en movimientos_inventario (nunca se
+   * edita el número sin rastro).
+   */
+  async ajustarStock(productoId: string, nuevaCantidad: number) {
+    const { error } = await this.supabase.rpc('ajustar_stock', {
+      p_producto_id: productoId,
+      p_nueva_cantidad: nuevaCantidad,
+    });
+    if (error) throw new Error(error.message);
   }
 
   async obtener(id: string) {

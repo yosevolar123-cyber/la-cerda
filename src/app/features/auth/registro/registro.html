@@ -15,6 +15,12 @@
       <form class="auth-screen__card" [formGroup]="form" (ngSubmit)="enviar()" novalidate>
         <h2>Crear cuenta</h2>
 
+        @if (vieneDelCheckout(redirect())) {
+          <p class="auth-screen__aviso" role="status">
+            Crea tu cuenta para finalizar tu pedido. Tu carrito se conserva.
+          </p>
+        }
+
         @if (errorGeneral()) {
           <p class="field__error" role="alert">{{ errorGeneral() }}</p>
         }
@@ -88,7 +94,9 @@
         <app-button type="submit" size="lg" [loading]="enviando()">Crear cuenta</app-button>
 
         <p class="auth-screen__switch">
-          ¿Ya tienes cuenta? <a routerLink="/auth/login">Inicia sesión</a>
+          ¿Ya tienes cuenta? <a routerLink="/auth/login" [queryParams]="redirect() ? { redirect: redirect() } : {}"
+            >Inicia sesión</a
+          >
         </p>
       </form>
     }

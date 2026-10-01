@@ -20,3 +20,133 @@
   justify-content: center;
   color: var(--color-text-muted);
 }
+
+// --- Columna Stock (clic abre "Ajustar stock") ---------------------------------------------------
+.stock-celda {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.25rem 0.6rem;
+  border: var(--border-w) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font: inherit;
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--color-secondary);
+    color: var(--color-secondary);
+  }
+}
+
+.stock-celda__num {
+  min-width: 2.5ch;
+  text-align: right;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text);
+}
+
+.stock-celda--bajo {
+  border-color: var(--color-danger);
+  background: var(--color-danger-tint);
+
+  .stock-celda__num {
+    color: var(--color-danger);
+  }
+}
+
+// --- Modal "Ajustar stock" ---------------------------------------------------------------------
+.dialogo-stock {
+  width: min(28rem, calc(100vw - 2rem));
+  padding: var(--space-6);
+  border: none;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-lg);
+
+  &::backdrop {
+    background: rgb(34 23 36 / 45%);
+    backdrop-filter: blur(2px);
+  }
+
+  h2 {
+    font-size: var(--fs-xl);
+    margin: 0 0 var(--space-1);
+  }
+}
+
+.dialogo-stock__producto {
+  margin: 0 0 var(--space-4);
+  font-weight: 600;
+
+  span {
+    font-weight: 400;
+    color: var(--color-text-muted);
+  }
+}
+
+.dialogo-stock__actual {
+  margin: 0 0 var(--space-4);
+  color: var(--color-text-muted);
+
+  strong {
+    color: var(--color-text);
+    font-size: var(--fs-lg);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.dialogo-stock__control {
+  display: flex;
+  gap: var(--space-2);
+
+  .input {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.dialogo-stock__paso {
+  flex: none;
+  padding: 0 0.6rem;
+  border: var(--border-w) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-sunken);
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--color-border-strong);
+  }
+}
+
+.dialogo-stock__resumen {
+  margin: var(--space-3) 0 0;
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.dialogo-stock__acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+// Con la columna Stock la tabla ya no entra a 1280px: el nombre puede partirse en dos líneas.
+.tabla td.col-nombre {
+  white-space: normal;
+  min-width: 12rem;
+}

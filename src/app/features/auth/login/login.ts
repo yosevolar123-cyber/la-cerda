@@ -1,9 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/auth/auth.service';
 import { emailGmailValidator } from '../../../core/auth/validators';
 import { ROLE_HOME_ROUTE } from '../../../core/models/roles';
+import { destinoSeguro, vieneDelCheckout } from '../../../core/auth/redirect';
 import { Button } from '../../../shared/ui/button/button';
 import { FieldError } from '../../../shared/ui/field-error/field-error';
 
@@ -17,6 +18,10 @@ export class Login {
   private fb = inject(FormBuilder);
   private auth = inject(AuthService);
   private router = inject(Router);
+
+  /** `?redirect=` puesto por los guards (withComponentInputBinding). */
+  redirect = input<string>();
+  protected readonly vieneDelCheckout = vieneDelCheckout;
 
   enviando = signal(false);
   errorGeneral = signal<string | null>(null);
@@ -48,6 +53,8 @@ export class Login {
       this.errorGeneral.set('Correo o contraseña incorrectos.');
       return;
     }
-    this.router.navigateByUrl(rol ? ROLE_HOME_ROUTE[rol] : '/catalogo');
+    this.router.navigateByUrl(
+      destinoSeguro(this.redirect()) ?? (rol ? ROLE_HOME_ROUTE[rol] : '/catalogo'),
+    );
   }
 }

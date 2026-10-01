@@ -86,3 +86,13 @@
     color: var(--color-text-muted);
   }
 }
+
+.auth-screen__aviso {
+  margin: calc(var(--space-5) * -0.5) 0 var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-primary-tint);
+  color: var(--color-primary);
+  font-size: var(--fs-sm);
+  max-width: none;
+}

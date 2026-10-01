@@ -22,6 +22,7 @@
             <th>SKU</th>
             <th>Categoría</th>
             <th>Precio</th>
+            <th>Stock</th>
             <th>Estado</th>
             <th></th>
           </tr>
@@ -40,10 +41,22 @@
                   }
                 </div>
               </td>
-              <td>{{ p.nombre }}</td>
+              <td class="col-nombre">{{ p.nombre }}</td>
               <td>{{ p.sku }}</td>
               <td>{{ p.categorias_producto?.nombre }}</td>
               <td>{{ p.precio_base !== null ? 'Bs ' + p.precio_base.toFixed(2) : '—' }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="stock-celda"
+                  [class.stock-celda--bajo]="esBajoStock(p.stock)"
+                  (click)="abrirAjuste(p)"
+                  [attr.aria-label]="'Ajustar stock de ' + p.nombre + ', actual ' + p.stock"
+                >
+                  <span class="stock-celda__num">{{ p.stock }}</span>
+                  <app-icon name="edit" [size]="14" />
+                </button>
+              </td>
               <td>
                 <app-badge [tone]="p.estado ? 'success' : 'neutral'">{{
                   p.estado ? 'Activo' : 'Inactivo'
@@ -63,4 +76,58 @@
       </table>
     </div>
   }
+
+  <dialog #dialogoStock class="dialogo-stock" (close)="ajustando.set(null)">
+    @if (ajustando(); as p) {
+      <form method="dialog" (submit)="$event.preventDefault(); guardarAjuste()" novalidate>
+        <h2>Ajustar stock</h2>
+        <p class="dialogo-stock__producto">{{ p.nombre }} <span>· {{ p.sku }}</span></p>
+
+        <p class="dialogo-stock__actual">
+          Stock actual <strong>{{ p.stock }}</strong>
+        </p>
+
+        <div class="field">
+          <label class="field__label" for="nueva-cantidad">Nueva cantidad</label>
+          <div class="dialogo-stock__control">
+            <button type="button" class="dialogo-stock__paso" (click)="sumar(-10)">−10</button>
+            <button type="button" class="dialogo-stock__paso" (click)="sumar(-1)">−1</button>
+            <input
+              id="nueva-cantidad"
+              class="input"
+              type="number"
+              min="0"
+              step="1"
+              inputmode="numeric"
+              [value]="nuevaCantidad() ?? ''"
+              (input)="leerCantidad($any($event.target).value)"
+            />
+            <button type="button" class="dialogo-stock__paso" (click)="sumar(1)">+1</button>
+            <button type="button" class="dialogo-stock__paso" (click)="sumar(10)">+10</button>
+          </div>
+        </div>
+
+        <p class="dialogo-stock__resumen" aria-live="polite">
+          @if (diferencia() > 0) {
+            Se registrará una <strong>entrada</strong> de {{ diferencia() }} unidades.
+          } @else if (diferencia() < 0) {
+            Se registrará una <strong>salida</strong> de {{ -diferencia() }} unidades.
+          } @else {
+            Sin cambios.
+          }
+        </p>
+
+        @if (errorStock()) {
+          <p class="field__error" role="alert">{{ errorStock() }}</p>
+        }
+
+        <div class="dialogo-stock__acciones">
+          <app-button variant="ghost" (click)="cerrarAjuste()">Cancelar</app-button>
+          <app-button type="submit" [loading]="guardandoStock()" [disabled]="diferencia() === 0"
+            >Guardar</app-button
+          >
+        </div>
+      </form>
+    }
+  </dialog>
 </section>

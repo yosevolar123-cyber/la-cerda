@@ -13,6 +13,7 @@ export type IconName =
   | 'search'
   | 'plus'
   | 'minus'
+  | 'edit'
   | 'arrow-right'
   | 'clock'
   | 'map-pin';
@@ -43,4 +44,5 @@ export const ICON_PATHS: Record<IconName, string> = {
   clock: '<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/>',
   'map-pin':
     '<path d="M12 21 C12 21 5 14.5 5 9.5 a7 7 0 0 1 14 0 C19 14.5 12 21 12 21 Z"/><circle cx="12" cy="9.5" r="2.5"/>',
+  edit: '<path d="M4 20h4L19 9l-4-4L4 16v4Z"/><line x1="13.5" y1="6.5" x2="17.5" y2="10.5"/>',
 };
